@@ -3,6 +3,14 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
+// Importing the faces
+import FaceContact from "./FaceContact";
+import FaceEducation from "./FaceEducation";
+import FaceExperience from "./FaceExperience";
+import FaceIntro from "./FaceIntro";
+import FaceProjects from "./FaceProjects";
+import FaceSkills from "./FaceSkills";
+
 const faces = [
   { content: "Intro", rotX: 0, rotY: 0 },
   { content: "Education", rotX: 0, rotY: -90 },
@@ -55,7 +63,7 @@ export default function Cube() {
             transform: "rotateY(0deg) translateZ(calc(var(--face-size) / 2))", // was 100px
           }}
         >
-          Intro
+          <FaceIntro />
         </div>
 
         {/* Education */}
@@ -65,7 +73,7 @@ export default function Cube() {
             transform: "rotateY(90deg) translateZ(calc(var(--face-size) / 2))",
           }}
         >
-          Education
+          <FaceEducation />
         </div>
 
         {/* Skills - bottom, rotated back upright */}
@@ -76,7 +84,7 @@ export default function Cube() {
               "rotateX(-90deg) translateZ(calc(var(--face-size) / 2)) rotateZ(90deg)",
           }}
         >
-          Skills
+          <FaceSkills />
         </div>
 
         {/* Projects */}
@@ -86,7 +94,7 @@ export default function Cube() {
             transform: "rotateY(180deg) translateZ(calc(var(--face-size) / 2))",
           }}
         >
-          Projects
+          <FaceProjects />
         </div>
 
         {/* Experience */}
@@ -96,7 +104,7 @@ export default function Cube() {
             transform: "rotateY(-90deg) translateZ(calc(var(--face-size) / 2))",
           }}
         >
-          Experience
+          <FaceExperience />
         </div>
 
         {/* Contact - top, rotated back upright */}
@@ -107,7 +115,7 @@ export default function Cube() {
               "rotateX(90deg) translateZ(calc(var(--face-size) / 2)) rotateZ(90deg)",
           }}
         >
-          Contact
+          <FaceContact />
         </div>
       </motion.div>
 
