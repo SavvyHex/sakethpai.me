@@ -3,15 +3,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-/* Custom Colors */
-  --face-intro: #0F172A;
-  --face-education: #2563EB;
-  --face-projects: #14B8A6;
-  --face-skills: #F59E0B;
-  --face-experience: #8B5CF6;
-  --face-contact: #F43F5E;
+  /* Custom Colors */
+  --face-intro: #0f172a;
+  --face-education: #2563eb;
+  --face-projects: #14b8a6;
+  --face-skills: #f59e0b;
+  --face-experience: #8b5cf6;
+  --face-contact: #f43f5e;
 }
-
 
 @theme inline {
   --color-background: var(--background);
