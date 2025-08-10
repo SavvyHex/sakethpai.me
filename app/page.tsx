@@ -1,8 +1,8 @@
 import Cube from "./components/Cube";
 
-export default function Home() {
+export default function Page() {
   return (
-    <main className="w-full h-screen overflow-hidden">
+    <main className="flex min-h-screen items-center justify-center bg-[var(--bg-color)]">
       <Cube />
     </main>
   );
