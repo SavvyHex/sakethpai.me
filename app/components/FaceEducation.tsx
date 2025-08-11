@@ -5,15 +5,15 @@ export default function FaceEducation() {
       <ul className="space-y-3 text-center">
         <li>
           <strong>10th Grade (ICSE board)</strong>
-          <p className="text-sm opacity-80">SFS Public School, 2022</p>
+          <p className="text-sm opacity-80">SFS Public School, 2022 — <span className="opacity-60">94.6%</span></p>
         </li>
         <li>
           <strong>12th Grade (CBSE board)</strong>
-          <p className="text-sm opacity-80">Christ Academy Junior College, 2024</p>
+          <p className="text-sm opacity-80">Christ Academy Junior College, 2024 — <span className="opacity-60">92.4%</span></p>
         </li>
         <li>
           <strong>B.Tech – Computer Science</strong>
-          <p className="text-sm opacity-80">PES University, 2024–2028</p>
+          <p className="text-sm opacity-80">PES University, 2024–2028 — <span className="opacity-60">8.04 CGPA</span></p>
         </li>
         <li>
           <strong>Certifications</strong>
