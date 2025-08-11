@@ -4,7 +4,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 export default function FaceContact() {
   return (
-    <div className="flex flex-col items-center justify-center bg-[var(--face-contact)] text-white p-8 w-full h-full rounded-2xl shadow-lg">
+    <div className="flex flex-col items-center justify-center bg-[var(--face-contact)] text-white p-8 w-full h-full shadow-lg">
       <h1 className="text-4xl font-bold mb-6">📞 Contact</h1>
       <p className="mb-8 text-lg opacity-90 text-center">
         Let’s connect and collaborate!
