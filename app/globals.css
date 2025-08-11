@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "devicon/devicon.min.css";
 
 :root {
   --background: #ffffff;
@@ -7,7 +8,7 @@
   --face-intro: #0f172a;
   --face-education: #2563eb;
   --face-projects: #14b8a6;
-  --face-skills: #f59e0b;
+  --face-skills: #0d9488;
   --face-experience: #8b5cf6;
   --face-contact: #f43f5e;
   /* Face Size */
