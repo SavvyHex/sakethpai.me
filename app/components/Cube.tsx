@@ -1,72 +1,176 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useRef, JSX } from "react";
 
-// Importing the faces
-import FaceContact from "./FaceContact";
-import FaceEducation from "./FaceEducation";
-import FaceExperience from "./FaceExperience";
+// Faces
 import FaceIntro from "./FaceIntro";
-import FaceProjects from "./FaceProjects";
+import FaceEducation from "./FaceEducation";
 import FaceSkills from "./FaceSkills";
+import FaceProjects from "./FaceProjects";
+import FaceExperience from "./FaceExperience";
+import FaceContact from "./FaceContact";
 
-const faces = [
-  { content: "Intro", rotX: 0, rotY: 0 },
-  { content: "Education", rotX: 0, rotY: -90 },
-  { content: "Skills", rotX: 90, rotY: -90 },
-  { content: "Projects", rotX: 0, rotY: -180 },
-  { content: "Experience", rotX: 0, rotY: -270 },
-  { content: "Contact", rotX: -90, rotY: -270 },
+type FaceConfig = {
+  label: string;
+  rotX: number;
+  rotY: number;
+  component: JSX.Element;
+};
+
+const faces: FaceConfig[] = [
+  { label: "Intro", rotX: 0, rotY: 0, component: <FaceIntro /> },
+  { label: "Education", rotX: 0, rotY: -90, component: <FaceEducation /> },
+  { label: "Skills", rotX: 90, rotY: -90, component: <FaceSkills /> },
+  { label: "Projects", rotX: 0, rotY: -180, component: <FaceProjects /> },
+  { label: "Experience", rotX: 0, rotY: -270, component: <FaceExperience /> },
+  { label: "Contact", rotX: -90, rotY: -270, component: <FaceContact /> },
 ];
 
 export default function Cube() {
-  const [index, setIndex] = useState(0);
+  // current rotation state (degrees). These can be any numbers (not normalized)
+  const [rotation, setRotation] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
 
-  const handleWheel = (e: WheelEvent) => {
-    if (e.deltaY > 0) {
-      setIndex((prev) => (prev + 1) % faces.length);
-    } else {
-      setIndex((prev) => (prev - 1 + faces.length) % faces.length);
-    }
+  // last rotation before drag start (used as baseline while dragging)
+  const lastRotationRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+
+  // pointer start info
+  const pointerStartRef = useRef<{ x: number; y: number; id: number } | null>(
+    null
+  );
+
+  // TUNING: drag sensitivity (degrees per pixel). Lower = slower / finer.
+  const DRAG_SENSITIVITY = 0.35;
+
+  // ---- helpers for angle math ----
+  // modulus helper
+  const mod = (n: number, m = 360) => ((n % m) + m) % m;
+
+  // minimal angle difference in range (-180, 180]
+  const minimalAngleDiff = (target: number, current: number) => {
+    // compute ((target - current + 180) % 360) - 180
+    return mod(target - current + 180, 360) - 180;
   };
 
-  useEffect(() => {
-    window.addEventListener("wheel", handleWheel, { passive: true });
-    return () => window.removeEventListener("wheel", handleWheel);
-  }, []);
+  // find nearest face index (using shortest angular distances on both axes)
+  const getNearestFaceIndex = (curX: number, curY: number) => {
+    let bestIndex = 0;
+    let bestDist = Infinity;
+    for (let i = 0; i < faces.length; i++) {
+      const dx = minimalAngleDiff(faces[i].rotX, curX);
+      const dy = minimalAngleDiff(faces[i].rotY, curY);
+      const dist = Math.hypot(dx, dy);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestIndex = i;
+      }
+    }
+    return bestIndex;
+  };
 
-  const { rotX, rotY } = faces[index];
+  // Given a face index and current angles, compute a target rotation that is the
+  // canonical face angles shifted by the minimal diffs (so animation takes shortest path)
+  const computeTargetRotationForFace = (
+    faceIndex: number,
+    curX: number,
+    curY: number
+  ) => {
+    const face = faces[faceIndex];
+    const dx = minimalAngleDiff(face.rotX, curX);
+    const dy = minimalAngleDiff(face.rotY, curY);
+    return { x: curX + dx, y: curY + dy };
+  };
+
+  // ---- Pointer handlers for drag ----
+  function onPointerDown(e: React.PointerEvent) {
+    // capture pointer so we keep receiving move/up
+    (e.target as Element).setPointerCapture(e.pointerId);
+    pointerStartRef.current = { x: e.clientX, y: e.clientY, id: e.pointerId };
+    lastRotationRef.current = { ...rotation };
+  }
+
+  function onPointerMove(e: React.PointerEvent) {
+    if (!pointerStartRef.current) return;
+    // how far have we dragged
+    const dx = e.clientX - pointerStartRef.current.x;
+    const dy = e.clientY - pointerStartRef.current.y;
+
+    // compute new rotation based on drag
+    const newY = lastRotationRef.current.y + dx * DRAG_SENSITIVITY;
+    const newX = lastRotationRef.current.x - dy * DRAG_SENSITIVITY;
+
+    setRotation({ x: newX, y: newY });
+  }
+
+  function onPointerUp(e: React.PointerEvent) {
+    if (!pointerStartRef.current) return;
+    // release pointer capture
+    try {
+      (e.target as Element).releasePointerCapture(pointerStartRef.current.id);
+    } catch {
+      /* ignore */
+    }
+    pointerStartRef.current = null;
+    lastRotationRef.current = { ...rotation };
+
+    // snap to nearest face along shortest path
+    const nearestIndex = getNearestFaceIndex(rotation.x, rotation.y);
+    const target = computeTargetRotationForFace(
+      nearestIndex,
+      rotation.x,
+      rotation.y
+    );
+    setRotation(target);
+    lastRotationRef.current = target;
+  }
+
+  // Clickable face selection
+  const onSelectFace = (index: number) => {
+    const target = computeTargetRotationForFace(index, rotation.x, rotation.y);
+    setRotation(target);
+    lastRotationRef.current = target;
+  };
+
+  // active face index for UI highlight
+  const activeFaceIndex = getNearestFaceIndex(rotation.x, rotation.y);
 
   return (
-    <div className="cube-container flex items-center justify-center h-screen bg-black">
+    <div className="cube-container flex items-center justify-center h-screen bg-black relative">
       <motion.div
         className="relative"
         style={{
           width: "var(--face-size)",
           height: "var(--face-size)",
           transformStyle: "preserve-3d",
+          touchAction: "none", // allow pointer events without scrolling
         }}
         animate={{
-          rotateX: rotX,
-          rotateY: rotY,
+          rotateX: rotation.x,
+          rotateY: rotation.y,
         }}
         transition={{
-          duration: 0.8,
-          ease: [0.25, 0.8, 0.25, 1],
+          type: "spring",
+          stiffness: 100,
+          damping: 18,
         }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
       >
-        {/* Intro */}
+        {/* faces in original mapping/order */}
         <div
           className="cube-face"
           style={{
-            transform: "rotateY(0deg) translateZ(calc(var(--face-size) / 2))", // was 100px
+            transform: "rotateY(0deg) translateZ(calc(var(--face-size) / 2))",
           }}
         >
           <FaceIntro />
         </div>
 
-        {/* Education */}
         <div
           className="cube-face"
           style={{
@@ -76,7 +180,6 @@ export default function Cube() {
           <FaceEducation />
         </div>
 
-        {/* Skills - bottom, rotated back upright */}
         <div
           className="cube-face"
           style={{
@@ -87,7 +190,6 @@ export default function Cube() {
           <FaceSkills />
         </div>
 
-        {/* Projects */}
         <div
           className="cube-face"
           style={{
@@ -97,7 +199,6 @@ export default function Cube() {
           <FaceProjects />
         </div>
 
-        {/* Experience */}
         <div
           className="cube-face"
           style={{
@@ -107,7 +208,6 @@ export default function Cube() {
           <FaceExperience />
         </div>
 
-        {/* Contact - top, rotated back upright */}
         <div
           className="cube-face"
           style={{
@@ -119,6 +219,26 @@ export default function Cube() {
         </div>
       </motion.div>
 
+      {/* Clickable selector - pills */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
+        {faces.map((f, i) => (
+          <button
+            key={f.label}
+            onClick={() => onSelectFace(i)}
+            className={`px-3 py-1 rounded-full text-sm select-none focus:outline-none transition-all
+              ${
+                i === activeFaceIndex
+                  ? "bg-white text-black"
+                  : "bg-white/10 text-white hover:bg-white/20"
+              }`}
+            aria-pressed={i === activeFaceIndex}
+            aria-label={`Go to ${f.label}`}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
+
       <style jsx>{`
         .cube-face {
           position: absolute;
@@ -129,7 +249,6 @@ export default function Cube() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 20px;
           color: white;
           backface-visibility: hidden;
         }
