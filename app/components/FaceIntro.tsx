@@ -10,7 +10,7 @@ export default function FaceIntro() {
         </p>
       </div>
       <div className="mt-4 flex flex-col space-y-2 items-center justify-center">
-        <h2 className="text-2xl font-bold">About Me</h2>
+        <h2 className="text-2xl font-bold">🙋‍♂️ About Me</h2>
         <p className="text-center leading-relaxed">
           I'm a proud Linux user with a passion for cybersecurity and full-stack
           development. I love building{" "}

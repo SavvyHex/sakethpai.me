@@ -16,7 +16,7 @@ export default function FaceEducation() {
           <p className="text-sm opacity-80">PES University, 2024–2028 — <span className="opacity-60">8.04 CGPA</span></p>
         </li>
         <li>
-          <strong>Certifications</strong>
+          <strong>📜 Certifications</strong>
           <p className="text-sm opacity-80">
             Google Cybersecurity, ZSecurity Ethical Hacking
           </p>
