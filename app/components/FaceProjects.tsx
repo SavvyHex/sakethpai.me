@@ -27,10 +27,12 @@ export default function FaceProjects() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full bg-[var(--face-projects)] text-white p-6 overflow-y-auto">
-      <h2 className="text-3xl font-semibold mb-6">📂 Projects</h2>
+    <div className="flex flex-col items-center justify-center w-full h-full p-[5%] bg-[var(--face-projects)] text-white overflow-y-auto">
+      <h2 className="text-[clamp(1rem,2vw,2rem)] font-semibold mb-[4%]">
+        📂 Projects
+      </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(40%,1fr))] gap-[3%] w-full place-items-stretch">
         {repos.map((repo) => (
           <ProjectCard key={repo.id} repo={repo} />
         ))}
@@ -45,15 +47,17 @@ function ProjectCard({ repo }: { repo: RepoData }) {
       href={repo.html_url}
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[var(--face-intro)] rounded-lg shadow-lg p-4 flex flex-col justify-between h-48 transition-transform hover:scale-105"
+      className="bg-[var(--face-intro)] rounded-lg shadow-lg p-[4%] flex flex-col justify-between min-h-[30%] transition-transform hover:scale-105"
     >
       <div>
-        <h3 className="text-lg font-bold mb-2">{repo.name}</h3>
-        <p className="text-sm opacity-80 line-clamp-3">
+        <h3 className="text-[clamp(0.9rem,1.5vw,1.25rem)] font-bold mb-[2%]">
+          {repo.name}
+        </h3>
+        <p className="text-[clamp(0.75rem,1vw,1rem)] opacity-80 line-clamp-3">
           {repo.description || "No description available."}
         </p>
       </div>
-      <div className="flex justify-between text-xs mt-4 opacity-70">
+      <div className="flex justify-between text-[clamp(0.65rem,0.9vw,0.75rem)] mt-[4%] opacity-70">
         <span>{repo.language || "Unknown Language"}</span>
       </div>
     </a>
