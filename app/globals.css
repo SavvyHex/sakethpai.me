@@ -12,19 +12,7 @@
   --face-experience: #8b5cf6;
   --face-contact: #f43f5e;
   /* Face Size */
-  --face-size: 750px;
-}
-
-@media (max-width: 1024px) {
-  :root {
-    --face-size: 500px;
-  }
-}
-
-@media (max-width: 640px) {
-  :root {
-    --face-size: 300px;
-  }
+  --face-size: min(75vw, 75vh); /* keeps it square and fitting screen */
 }
 
 @media (prefers-color-scheme: dark) {
