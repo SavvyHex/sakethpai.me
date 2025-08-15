@@ -1,6 +1,5 @@
 import React from "react";
-import { MdEmail } from "react-icons/md";
-import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { SiLinkedin, SiGithub, SiHuggingface, SiGmail } from "react-icons/si";
 
 export default function FaceContact() {
   return (
@@ -15,7 +14,7 @@ export default function FaceContact() {
           href="mailto:paisaketh@gmail.com"
           className="flex items-center justify-center gap-4 hover:text-yellow-300 transition-colors"
         >
-          <MdEmail size={28} />
+          <SiGmail size={28} />
           <span className="font-medium text-lg text-center">
             paisaketh@gmail.com
           </span>
@@ -27,10 +26,8 @@ export default function FaceContact() {
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-4 hover:text-yellow-300 transition-colors"
         >
-          <FaLinkedin size={28} />
-          <span className="font-medium text-lg text-center">
-            Saketh Pai
-          </span>
+          <SiLinkedin size={28} />
+          <span className="font-medium text-lg text-center">Saketh Pai</span>
         </a>
 
         <a
@@ -39,10 +36,18 @@ export default function FaceContact() {
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-4 hover:text-yellow-300 transition-colors"
         >
-          <FaGithub size={28} />
-          <span className="font-medium text-lg text-center">
-            SavvyHex
-          </span>
+          <SiGithub size={28} />
+          <span className="font-medium text-lg text-center">SavvyHex</span>
+        </a>
+
+        <a
+          href="https://huggingface.co/SavvyHex"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-4 hover:text-yellow-300 transition-colors"
+        >
+          <SiHuggingface size={28} />
+          <span className="font-medium text-lg text-center">SavvyHex</span>
         </a>
       </div>
     </div>
