@@ -6,7 +6,7 @@ const repoNames: string[] = [
   "SavvyHex/saia",
   "SavvyHex/devcube",
   "SavvyHex/babygit",
-  "google/osv-scanner",
+  "SavvyHex/Keylogger",
 ];
 
 const CACHE_DURATION = 3600; // seconds
