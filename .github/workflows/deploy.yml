@@ -1,0 +1,32 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # change if your default branch is different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Copy files to Pages repo
+        run: |
+          git config --global user.name "SavvyHex"
+          git config --global user.email "your-email@example.com"
+          
+          # Clone the Pages repo
+          git clone https://x-access-token:${{ secrets.PAGES_TOKEN }}@github.com/SavvyHex/SavvyHex.github.io temp-pages
+          
+          # Remove old files
+          rm -rf temp-pages/*
+          
+          # Copy new build (in this case, just raw files)
+          cp -r * temp-pages/
+          
+          cd temp-pages
+          git add .
+          git commit -m "Deploy from devcube"
+          git push origin main
