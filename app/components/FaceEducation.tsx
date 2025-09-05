@@ -1,6 +1,6 @@
 export default function FaceEducation() {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center bg-[var(--face-education)] text-white p-6">
+    <div className="flex h-full w-full flex-col items-center justify-center bg-[#18181b] rounded-2xl text-white p-6 shadow-lg">
       <h2 className="text-3xl font-semibold mb-4">📚 Education</h2>
       <ul className="space-y-3 text-center">
         <li>

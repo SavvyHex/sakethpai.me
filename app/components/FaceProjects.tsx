@@ -27,7 +27,7 @@ export default function FaceProjects() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-[5%] bg-[var(--face-projects)] text-white overflow-y-auto">
+    <div className="flex flex-col items-center justify-center w-full h-full p-[5%] bg-[#18181b] rounded-2xl text-white overflow-y-auto shadow-lg">
       <h2 className="text-[clamp(1rem,2vw,2rem)] font-semibold mb-[4%]">
         📂 Projects
       </h2>
@@ -47,7 +47,7 @@ function ProjectCard({ repo }: { repo: RepoData }) {
       href={repo.html_url}
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[var(--face-intro)] rounded-lg shadow-lg p-[4%] flex flex-col justify-between min-h-[30%] transition-transform hover:scale-105"
+  className="bg-[#232326] rounded-lg shadow-lg p-[4%] flex flex-col justify-between min-h-[30%] transition-transform hover:scale-105"
     >
       <div>
         <h3 className="text-[clamp(0.9rem,1.5vw,1.25rem)] font-bold mb-[2%]">

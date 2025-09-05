@@ -6,7 +6,7 @@ import React from "react";
 
 export default function FaceExperience() {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center bg-[var(--face-experience)] text-white p-6 overflow-y-auto">
+    <div className="flex h-full w-full flex-col items-center justify-center bg-[#18181b] rounded-2xl text-white p-6 overflow-y-auto shadow-lg">
       <h1 className="text-4xl font-bold mb-6">💼 Experience</h1>
       <div className="space-y-4 max-w-md w-full">
         {/* Hacknight Achievement */}
