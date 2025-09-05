@@ -27,7 +27,7 @@ export default function FaceProjects() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-[5%] bg-[#18181b] rounded-2xl text-white overflow-y-auto shadow-lg">
+  <div className="face-glow flex flex-col items-center justify-center w-full h-full p-[5%] bg-[#18181b] rounded-2xl text-white overflow-y-auto shadow-lg">
       <h2 className="text-[clamp(1rem,2vw,2rem)] font-semibold mb-[4%]">
         📂 Projects
       </h2>

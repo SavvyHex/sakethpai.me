@@ -1,6 +1,6 @@
 export default function FaceSkills() {
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full bg-[#18181b] rounded-2xl text-white p-6 overflow-y-auto shadow-lg">
+  <div className="face-glow flex flex-col items-center justify-center h-full w-full bg-[#18181b] rounded-2xl text-white p-6 overflow-y-auto shadow-lg">
       <h2 className="text-3xl font-semibold mb-6">⚙️ Skills</h2>
 
       {/* Languages */}

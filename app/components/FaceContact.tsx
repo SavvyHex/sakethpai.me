@@ -3,7 +3,7 @@ import { SiLinkedin, SiGithub, SiHuggingface, SiGmail } from "react-icons/si";
 
 export default function FaceContact() {
   return (
-    <div className="flex flex-col items-center justify-center bg-[#18181b] rounded-2xl text-white p-8 w-full h-full shadow-lg">
+  <div className="face-glow flex flex-col items-center justify-center bg-[#18181b] rounded-2xl text-white p-8 w-full h-full shadow-lg">
       <h1 className="text-4xl font-bold mb-6">📞 Contact</h1>
       <p className="mb-8 text-lg opacity-90 text-center">
         Let’s connect and collaborate!

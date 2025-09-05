@@ -1,6 +1,6 @@
 export default function FaceIntro() {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center bg-[#18181b] rounded-2xl text-white p-6 shadow-lg">
+  <div className="face-glow flex h-full w-full flex-col items-center justify-center bg-[#18181b] rounded-2xl text-white p-6 shadow-lg">
       <div className="flex flex-col items-center justify-center mb-4">
         <h1 className="text-4xl mb-2">
           👋 Hi! I'm <strong>Saketh Pai</strong>
