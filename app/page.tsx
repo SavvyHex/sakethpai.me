@@ -1,4 +1,6 @@
 
+
+import AnimatedBackground from "./components/AnimatedBackground";
 import FaceIntro from "./components/FaceIntro";
 import FaceSkills from "./components/FaceSkills";
 import FaceProjects from "./components/FaceProjects";
@@ -8,7 +10,8 @@ import FaceContact from "./components/FaceContact";
 
 export default function Page() {
   return (
-    <main className="flex flex-col items-center w-full min-h-screen bg-[var(--bg-color)]">
+    <main className="flex flex-col items-center w-full min-h-screen bg-[var(--bg-color)] relative">
+      <AnimatedBackground />
       <section id="about" className="w-full max-w-3xl my-12">
         <FaceIntro />
       </section>
