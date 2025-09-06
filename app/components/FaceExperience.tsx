@@ -1,12 +1,10 @@
-
 "use client";
 
 import React from "react";
 
-
 export default function FaceExperience() {
   return (
-  <div className="face-glow flex h-full w-full flex-col items-center justify-center bg-[#18181b] rounded-2xl text-white p-6 overflow-y-auto shadow-lg">
+    <div className="face-glow flex h-full w-full flex-col items-center justify-center bg-[#18181b] rounded-2xl text-white p-6 overflow-y-auto shadow-lg">
       <h1 className="text-4xl font-bold mb-6">💼 Experience</h1>
       <div className="space-y-4 max-w-md w-full">
         {/* Hacknight Achievement */}
@@ -33,7 +31,8 @@ export default function FaceExperience() {
             <h2 className="font-semibold text-xl">Event Organizer</h2>
             <p className="text-sm text-white/80">
               Organized <span className="font-bold">Deltatime 2.0</span> (Game
-              Jam) and <span className="font-bold">Heal-o-Code</span> (HealthTech Hackathon), coordinating participants, mentors, and
+              Jam) and <span className="font-bold">Heal-o-Code</span>{" "}
+              (HealthTech Hackathon), coordinating participants, mentors, and
               judging panels.
             </p>
           </div>

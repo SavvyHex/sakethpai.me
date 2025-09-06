@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import "./globals.css";
 import { Exo_2 } from "next/font/google";
@@ -23,9 +22,11 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${exo2.className} antialiased`}
-        style={{
-          "--font-exo2": exo2.style.fontFamily,
-        } as React.CSSProperties}
+        style={
+          {
+            "--font-exo2": exo2.style.fontFamily,
+          } as React.CSSProperties
+        }
       >
         <Navbar />
         <div className="pt-20">{children}</div>

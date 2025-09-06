@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 
 const AnimatedBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -9,7 +9,7 @@ const AnimatedBackground: React.FC = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationFrameId: number;
@@ -36,7 +36,7 @@ const AnimatedBackground: React.FC = () => {
     const animate = () => {
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'white';
+      ctx.fillStyle = "white";
       stars.forEach((star) => {
         star.y -= star.speed;
         if (star.y < 0) star.y = canvas.height;
@@ -51,13 +51,13 @@ const AnimatedBackground: React.FC = () => {
     initStars();
     animate();
 
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       resize();
       initStars();
     });
 
     return () => {
-      window.removeEventListener('resize', () => {
+      window.removeEventListener("resize", () => {
         resize();
         initStars();
       });

@@ -3,8 +3,8 @@
 @import "devicon/devicon.min.css";
 
 .face-glow {
-  box-shadow: 0 0 16px 2px #38bdf8, 0 0 32px 4px #18181b;
-  border: 1.5px solid #38bdf8;
+  border: 2px solid #38bdf8;
+  transition: box-shadow 0.3s;
 }
 
 :root {
