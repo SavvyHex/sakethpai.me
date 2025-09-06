@@ -1,6 +1,8 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { Exo_2 } from "next/font/google";
+import Navbar from "./components/Navbar";
 
 const exo2 = Exo_2({
   weight: ["400", "700"], // Add more weights if you want
@@ -21,13 +23,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${exo2.className} antialiased`}
-        style={
-          {
-            "--font-exo2": exo2.style.fontFamily,
-          } as React.CSSProperties
-        }
+        style={{
+          "--font-exo2": exo2.style.fontFamily,
+        } as React.CSSProperties}
       >
-        {children}
+        <Navbar />
+        <div className="pt-20">{children}</div>
       </body>
     </html>
   );
