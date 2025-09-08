@@ -5,22 +5,29 @@ import { notFound } from "next/navigation";
 import AnimatedBackground from "../../components/AnimatedBackground";
 import { marked } from "marked";
 
-interface PostProps {
-  params: { slug: string };
-}
-
 export async function generateStaticParams() {
   const postsDir = path.join(process.cwd(), "posts");
   const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".md"));
-  return files.map((filename) => ({ slug: filename.replace(/\.md$/, "") }));
+
+  return files.map((filename) => ({
+    slug: filename.replace(/\.md$/, ""),
+  }));
 }
 
-export default async function BlogPostPage({ params }: PostProps) {
-  const { slug } = await params;
+// 👇 Don't declare your own PageProps — let Next.js provide it
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = params;
+
   const filePath = path.join(process.cwd(), "posts", `${slug}.md`);
   if (!fs.existsSync(filePath)) return notFound();
+
   const fileContent = await fs.promises.readFile(filePath, "utf8");
   const { data, content } = matter(fileContent);
+
   const html = marked(content);
 
   return (
