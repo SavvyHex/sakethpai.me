@@ -5,6 +5,7 @@ import FaceProjects from "./components/FaceProjects";
 import FaceExperience from "./components/FaceExperience";
 import FaceEducation from "./components/FaceEducation";
 import FaceContact from "./components/FaceContact";
+import FaceBlog from "./components/FaceBlog";
 
 export default function Page() {
   return (
@@ -41,8 +42,14 @@ export default function Page() {
         <FaceEducation />
       </section>
       <section
+        id="blog"
+        className="w-full max-w-3xl my-12 scroll-mt-24"
+      >
+        <FaceBlog />
+      </section>
+      <section
         id="contact"
-    className="w-full max-w-3xl my-12 scroll-mt-24"
+        className="w-full max-w-3xl my-12 scroll-mt-24"
       >
         <FaceContact />
       </section>

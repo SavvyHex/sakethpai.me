@@ -7,7 +7,23 @@ const sections = [
   { id: "projects", label: "Projects" },
   { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
+  // Blog will be inserted before Contact
   { id: "contact", label: "Contact" },
+];
+
+const navLinks = [
+  ...sections.slice(0, 5).map((section) => ({
+    href: `#${section.id}`,
+    label: section.label,
+  })),
+  {
+    href: "/blog",
+    label: "Blog",
+  },
+  ...sections.slice(5).map((section) => ({
+    href: `#${section.id}`,
+    label: section.label,
+  })),
 ];
 
 export default function Navbar() {
@@ -18,14 +34,23 @@ export default function Navbar() {
         <span className="font-bold text-lg tracking-tight">sakethpai.me</span>
       </Link>
       <ul className="flex gap-6 text-base font-medium">
-        {sections.map((section) => (
-          <li key={section.id}>
-            <a
-              href={`#${section.id}`}
-              className="hover:text-primary transition-colors duration-200"
-            >
-              {section.label}
-            </a>
+        {navLinks.map((link) => (
+          <li key={link.label}>
+            {link.href.startsWith("#") ? (
+              <a
+                href={link.href}
+                className="hover:text-primary transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                href={link.href}
+                className="hover:text-primary transition-colors duration-200"
+              >
+                {link.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
