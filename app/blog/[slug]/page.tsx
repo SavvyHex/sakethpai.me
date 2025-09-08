@@ -15,8 +15,7 @@ export async function generateStaticParams() {
   return files.map((filename) => ({ slug: filename.replace(/\.md$/, "") }));
 }
 
-export default async function BlogPostPage(props: Promise<PostProps>) {
-  const { params } = await props;
+export default async function BlogPostPage({ params }: PostProps) {
   const { slug } = await params;
   const filePath = path.join(process.cwd(), "posts", `${slug}.md`);
   if (!fs.existsSync(filePath)) return notFound();
