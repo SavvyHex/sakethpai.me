@@ -3,7 +3,9 @@ import path from "path";
 import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import AnimatedBackground from "../../components/AnimatedBackground";
+import SpoilerScript from "../../components/SpoilerScript";
 import { marked } from "marked";
+
 
 export async function generateStaticParams() {
   const postsDir = path.join(process.cwd(), "posts");
@@ -18,9 +20,9 @@ export async function generateStaticParams() {
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const filePath = path.join(process.cwd(), "posts", `${slug}.md`);
   if (!fs.existsSync(filePath)) return notFound();
@@ -28,20 +30,31 @@ export default async function BlogPostPage({
   const fileContent = await fs.promises.readFile(filePath, "utf8");
   const { data, content } = matter(fileContent);
 
-  const html = marked(content);
+  // Replace ||spoiler|| with <span class="spoiler">spoiler</span> before markdown
+  const contentWithSpoilers = content.replace(/\|\|([^|]+)\|\|/g, '<span class="spoiler">$1</span>');
+  marked.setOptions({
+    gfm: true,
+    breaks: true,
+  });
+  const html = marked.parse(contentWithSpoilers);
+  
+  // Debug: log the HTML output
+  console.log('Parsed HTML:', html);
+
+
+
+
 
   return (
     <main className="flex flex-col items-center w-full min-h-screen bg-[var(--bg-color)] relative">
+  <SpoilerScript />
       <AnimatedBackground />
       <section className="face-glow flex flex-col w-[75vw] min-h-[60vh] p-[5%] bg-[#18181b] rounded-2xl text-white shadow-lg z-10 mt-24 mb-12">
         <h1 className="text-[clamp(2rem,4vw,3rem)] font-bold mb-4 text-primary">
           {data.title}
         </h1>
         <p className="text-gray-400 mb-8 text-lg">{data.description}</p>
-        <article
-          className="prose prose-invert max-w-none"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
+        <article className="prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: html }} />
       </section>
     </main>
   );
