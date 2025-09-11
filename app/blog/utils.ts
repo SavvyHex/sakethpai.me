@@ -10,15 +10,33 @@ export interface BlogMeta {
 
 export function getAllBlogMeta(): BlogMeta[] {
   const postsDir = path.join(process.cwd(), 'posts');
-  const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'));
-  return files.map(filename => {
-    const filePath = path.join(postsDir, filename);
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const { data } = matter(fileContent);
-    return {
-      slug: filename.replace(/\.md$/, ''),
-      title: data.title || filename,
-      description: data.description || '',
-    };
-  });
+  
+  function getMarkdownFiles(dir: string, baseDir: string = ''): BlogMeta[] {
+    const items = fs.readdirSync(dir);
+    let posts: BlogMeta[] = [];
+    
+    for (const item of items) {
+      const fullPath = path.join(dir, item);
+      const stat = fs.statSync(fullPath);
+      
+      if (stat.isDirectory()) {
+        // Recursively get files from subdirectories
+        const subPosts = getMarkdownFiles(fullPath, path.join(baseDir, item));
+        posts = posts.concat(subPosts);
+      } else if (item.endsWith('.md')) {
+        const fileContent = fs.readFileSync(fullPath, 'utf8');
+        const { data } = matter(fileContent);
+        const slug = baseDir ? `${baseDir}/${item.replace(/\.md$/, '')}` : item.replace(/\.md$/, '');
+        posts.push({
+          slug,
+          title: data.title || item,
+          description: data.description || '',
+        });
+      }
+    }
+    
+    return posts;
+  }
+  
+  return getMarkdownFiles(postsDir);
 }

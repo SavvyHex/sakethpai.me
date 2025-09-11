@@ -9,11 +9,29 @@ import { marked } from "marked";
 
 export async function generateStaticParams() {
   const postsDir = path.join(process.cwd(), "posts");
-  const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".md"));
-
-  return files.map((filename) => ({
-    slug: filename.replace(/\.md$/, ""),
-  }));
+  
+  function getMarkdownFiles(dir: string, baseDir: string = ''): { slug: string }[] {
+    const items = fs.readdirSync(dir);
+    let slugs: { slug: string }[] = [];
+    
+    for (const item of items) {
+      const fullPath = path.join(dir, item);
+      const stat = fs.statSync(fullPath);
+      
+      if (stat.isDirectory()) {
+        // Recursively get files from subdirectories
+        const subSlugs = getMarkdownFiles(fullPath, baseDir ? `${baseDir}/${item}` : item);
+        slugs = slugs.concat(subSlugs);
+      } else if (item.endsWith('.md')) {
+        const slug = baseDir ? `${baseDir}/${item.replace(/\.md$/, '')}` : item.replace(/\.md$/, '');
+        slugs.push({ slug });
+      }
+    }
+    
+    return slugs;
+  }
+  
+  return getMarkdownFiles(postsDir);
 }
 
 // 👇 Don't declare your own PageProps — let Next.js provide it
