@@ -22,4 +22,5 @@ You will then be prompted for a password. Note that **the password for each leve
 ## Levels
 
 [Level 0](/blog/bandit/level-0)
+[Level 1](/blog/bandit/level-1)
 

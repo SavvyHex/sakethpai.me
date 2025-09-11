@@ -6,6 +6,35 @@ import AnimatedBackground from "../../components/AnimatedBackground";
 import SpoilerScript from "../../components/SpoilerScript";
 import { marked } from "marked";
 
+interface NavigationFooterProps {
+  prevLink?: string;
+  prevTitle?: string;
+  nextLink?: string;
+  nextTitle?: string;
+}
+
+function NavigationFooter({ prevLink, prevTitle, nextLink, nextTitle }: NavigationFooterProps) {
+  return (
+    <div className="flex justify-between items-center mt-8 pt-4 border-t border-gray-600">
+      {prevLink ? (
+        <a href={prevLink} className="text-blue-400 hover:bg-gray-800 font-medium px-4 py-2 rounded-md transition-colors">
+          ← {prevTitle || "Previous"}
+        </a>
+      ) : (
+        <span></span>
+      )}
+      
+      {nextLink ? (
+        <a href={nextLink} className="text-blue-400 hover:bg-gray-800 font-medium px-4 py-2 rounded-md transition-colors">
+          {nextTitle || "Next"} →
+        </a>
+      ) : (
+        <span></span>
+      )}
+    </div>
+  );
+}
+
 
 export async function generateStaticParams() {
   const postsDir = path.join(process.cwd(), "posts");
@@ -49,6 +78,14 @@ export default async function BlogPostPage({
   const fileContent = await fs.promises.readFile(filePath, "utf8");
   const { data, content } = matter(fileContent);
 
+  // Extract navigation data from frontmatter
+  const navigation = {
+    prevLink: data.prevLink,
+    prevTitle: data.prevTitle,
+    nextLink: data.nextLink,
+    nextTitle: data.nextTitle,
+  };
+
   // Replace ||spoiler|| with <span class="spoiler">spoiler</span> before markdown
   const contentWithSpoilers = content.replace(/\|\|([^|]+)\|\|/g, '<span class="spoiler">$1</span>');
   marked.setOptions({
@@ -70,6 +107,7 @@ export default async function BlogPostPage({
         </h1>
         <p className="text-gray-400 mb-8 text-lg">{data.description}</p>
         <article className="prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: html }} />
+        <NavigationFooter {...navigation} />
       </section>
     </main>
   );
