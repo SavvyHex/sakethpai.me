@@ -10,9 +10,9 @@ import { marked } from "marked";
 export async function generateStaticParams() {
   const postsDir = path.join(process.cwd(), "posts");
   
-  function getMarkdownFiles(dir: string, baseDir: string = ''): { slug: string }[] {
+  function getMarkdownFiles(dir: string, baseDir: string = ''): { slug: string[] }[] {
     const items = fs.readdirSync(dir);
-    let slugs: { slug: string }[] = [];
+    let slugs: { slug: string[] }[] = [];
     
     for (const item of items) {
       const fullPath = path.join(dir, item);
@@ -23,8 +23,8 @@ export async function generateStaticParams() {
         const subSlugs = getMarkdownFiles(fullPath, baseDir ? `${baseDir}/${item}` : item);
         slugs = slugs.concat(subSlugs);
       } else if (item.endsWith('.md')) {
-        const slug = baseDir ? `${baseDir}/${item.replace(/\.md$/, '')}` : item.replace(/\.md$/, '');
-        slugs.push({ slug });
+        const slugPath = baseDir ? `${baseDir}/${item.replace(/\.md$/, '')}` : item.replace(/\.md$/, '');
+        slugs.push({ slug: slugPath.split('/') });
       }
     }
     
@@ -38,11 +38,12 @@ export async function generateStaticParams() {
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
+  const slugPath = slug.join('/');
 
-  const filePath = path.join(process.cwd(), "posts", `${slug}.md`);
+  const filePath = path.join(process.cwd(), "posts", `${slugPath}.md`);
   if (!fs.existsSync(filePath)) return notFound();
 
   const fileContent = await fs.promises.readFile(filePath, "utf8");
@@ -59,13 +60,9 @@ export default async function BlogPostPage({
   // Debug: log the HTML output
   console.log('Parsed HTML:', html);
 
-
-
-
-
   return (
     <main className="flex flex-col items-center w-full min-h-screen bg-[var(--bg-color)] relative">
-  <SpoilerScript />
+      <SpoilerScript />
       <AnimatedBackground />
       <section className="face-glow flex flex-col w-[75vw] min-h-[60vh] p-[5%] bg-[#18181b] rounded-2xl text-white shadow-lg z-10 mt-24 mb-12">
         <h1 className="text-[clamp(2rem,4vw,3rem)] font-bold mb-4 text-primary">

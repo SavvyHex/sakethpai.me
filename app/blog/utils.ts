@@ -10,33 +10,24 @@ export interface BlogMeta {
 
 export function getAllBlogMeta(): BlogMeta[] {
   const postsDir = path.join(process.cwd(), 'posts');
+  const items = fs.readdirSync(postsDir);
+  let posts: BlogMeta[] = [];
   
-  function getMarkdownFiles(dir: string, baseDir: string = ''): BlogMeta[] {
-    const items = fs.readdirSync(dir);
-    let posts: BlogMeta[] = [];
+  // Only get .md files directly in the posts directory, not subdirectories
+  for (const item of items) {
+    const fullPath = path.join(postsDir, item);
+    const stat = fs.statSync(fullPath);
     
-    for (const item of items) {
-      const fullPath = path.join(dir, item);
-      const stat = fs.statSync(fullPath);
-      
-      if (stat.isDirectory()) {
-        // Recursively get files from subdirectories
-        const subPosts = getMarkdownFiles(fullPath, path.join(baseDir, item));
-        posts = posts.concat(subPosts);
-      } else if (item.endsWith('.md')) {
-        const fileContent = fs.readFileSync(fullPath, 'utf8');
-        const { data } = matter(fileContent);
-        const slug = baseDir ? `${baseDir}/${item.replace(/\.md$/, '')}` : item.replace(/\.md$/, '');
-        posts.push({
-          slug,
-          title: data.title || item,
-          description: data.description || '',
-        });
-      }
+    if (stat.isFile() && item.endsWith('.md')) {
+      const fileContent = fs.readFileSync(fullPath, 'utf8');
+      const { data } = matter(fileContent);
+      posts.push({
+        slug: item.replace(/\.md$/, ''),
+        title: data.title || item,
+        description: data.description || '',
+      });
     }
-    
-    return posts;
   }
   
-  return getMarkdownFiles(postsDir);
+  return posts;
 }
