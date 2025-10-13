@@ -3,6 +3,8 @@ title: "OTW Bandit"
 description: "Level 3"
 prevLink: "./level-2"
 prevTitle: "Level 2"
+nextLink: "./level-4"
+nextTitle: "Level 4"
 ---
 
 ### Command
