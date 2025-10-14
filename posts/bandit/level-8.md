@@ -23,9 +23,9 @@ dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
 
 The website tells us that the flag is the only line of text that occurs only once. With this knowledge, we can simply type a single command, to
 
-1. Read the file
-2. Sort its lines
-3. Omit repeated lines
+- Read the file
+- Sort its lines
+- Omit repeated lines
 
 All of which can be done using the pipe `|` operator
 
