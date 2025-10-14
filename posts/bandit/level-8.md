@@ -4,7 +4,7 @@ description: "Level 8"
 prevLink: "./level-7"
 prevTitle: "Level 7"
 nextLink: "./level-9"
-nextTitle: "Level 9
+nextTitle: "Level 9"
 ---
 
 ### Command
@@ -23,9 +23,9 @@ dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
 
 The website tells us that the flag is the only line of text that occurs only once. With this knowledge, we can simply type a single command, to
 
-- Read the file
-- Sort its lines
-- Omit repeated lines
+1. Read the file
+2. Sort its lines
+3. Omit repeated lines
 
 All of which can be done using the pipe `|` operator
 
