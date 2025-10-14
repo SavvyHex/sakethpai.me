@@ -27,7 +27,7 @@ According to the website, the file has the following properties:
 - Owned by group bandit6
 - 33 bytes in size
 
-Keeping all of this in mind, we can type one single command to list all files which come under these crieterion.
+Keeping all of this in mind, we can type one single command to list all files which come under these criteria.
 
 ```bash
 find / -user bandit7 -group bandit6 -size 33c
