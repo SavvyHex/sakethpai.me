@@ -195,3 +195,90 @@ cat data.txt | tr 'A-Za-z' "N-ZA-Mn-za-m"
 ### Flag
 
 || 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4 ||
+
+## Level 12
+
+Compressed into a ball
+
+### Commands
+
+```bash
+mkdir /tmp/data
+cp data.txt /tmp/data
+cd /tmp/data
+file data.txt
+xxd -r data.txt data1
+file data1
+mv data1 data2.gz
+gzip -d data2.gz
+file data2
+mv data2 data3.bz2
+bzip2 -d data3.bz2
+file data3
+mv data3 data4.gz
+gzip -d data4.gz
+file data4
+tar -xvf data4
+file data5.bin
+tar -xvf data5.bin
+file data6.bin
+mv data6.bin data7.bz2
+bzip2 -d data7.bz2
+file data7
+tar -xvf data7
+file data8.bin
+mv data8.bin data8.gz
+gzip -d data8.gz
+file data8
+cat data8
+```
+
+### Flag
+
+|| FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn ||
+
+
+## Level 13
+
+Advanced SSH
+
+### Commands
+
+```bash
+scp -P 2220 bandit13@bandit.labs.overthewire.org:sshkey.private .
+chmod 700 sshkey.private
+ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220
+```
+
+### Flag
+
+|| MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS ||
+
+## Level 14
+
+Netcat
+
+### Commands
+
+```bash
+cat /etc/bandit_pass/bandit14
+nc localhost 30000
+```
+
+### Flag
+
+|| 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo ||
+
+## Level 15
+
+OpenSSL
+
+### Commands
+
+```bash
+openssl s_client -connect localhost:30001
+```
+
+### Flag
+
+|| kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx ||
