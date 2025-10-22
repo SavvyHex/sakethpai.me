@@ -276,9 +276,70 @@ OpenSSL
 ### Commands
 
 ```bash
-openssl s_client -connect localhost:30001
+openssl s_client -connect localhost:30001 -ign_eof
 ```
 
 ### Flag
 
 || kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx ||
+
+## Level 16
+
+nmap
+
+### Commands
+
+```bash
+nmap -sV localhost -p 31000-32000
+```
+
+### Flag
+
+|| NA ||
+
+## Level 17
+
+diff
+
+### Commands
+
+```bash
+diff passowords.new passwords.old
+```
+
+### Flag
+
+|| x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO ||
+
+## Level 18
+
+bashrc
+
+### Commands
+
+```bash
+ssh -T bandit.labs.overthewire.org -p 2220 -l bandit18
+cat readme
+```
+
+### Flag
+
+|| cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8 ||
+
+## Level 19
+
+do-as
+
+### Commands
+
+```bash
+./bandit20-do cat /etc/bandit_pass/bandit20
+```
+
+### Flag
+
+|| 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO ||
+
+## Level 20
+
+suconnect
