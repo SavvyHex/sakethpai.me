@@ -20,6 +20,14 @@ export default function FaceIntro() {
           find me playing <strong>chess</strong>, watching{" "}
           <strong>motorsports</strong> or <strong>3D modelling</strong>.
         </p>
+        <a
+          href="/Saketh%20Pai%20Resume.pdf"
+          download
+          aria-label="Download resume PDF"
+          className="mt-6 inline-flex items-center gap-2 bg-[#232326] hover:bg-[#2b2b2f] px-4 py-2 rounded-md text-white font-medium shadow"
+        >
+          ⬇️ Download My Resume
+        </a>
       </div>
     </div>
   );
