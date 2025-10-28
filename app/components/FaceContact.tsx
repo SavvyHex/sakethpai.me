@@ -1,5 +1,5 @@
 import React from "react";
-import { SiLinkedin, SiGithub, SiHuggingface, SiGmail } from "react-icons/si";
+import { SiLinkedin, SiGithub, SiHuggingface, SiGmail, SiTryhackme } from "react-icons/si";
 
 export default function FaceContact() {
   return (
@@ -47,6 +47,16 @@ export default function FaceContact() {
           className="flex items-center justify-center gap-4 hover:text-yellow-300 transition-colors"
         >
           <SiHuggingface size={28} />
+          <span className="font-medium text-lg text-center">SavvyHex</span>
+        </a>
+
+        <a
+          href="https://tryhackme.com/p/SavvyHex"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-4 hover:text-yellow-300 transition-colors"
+        >
+          <SiTryhackme size={28} />
           <span className="font-medium text-lg text-center">SavvyHex</span>
         </a>
       </div>
