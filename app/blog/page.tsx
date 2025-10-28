@@ -1,6 +1,10 @@
 import AnimatedBackground from "../components/AnimatedBackground";
 import { getAllBlogMeta } from "./utils";
 
+export const metadata = {
+  title: "Saketh Pai | Blog",
+};
+
 // Styling similar to FaceBlog/main page face sections
 
 export default function BlogPage() {

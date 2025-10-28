@@ -1,29 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const sections = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" },
-  { id: "education", label: "Education" },
-  // Blog will be inserted before Contact
-  { id: "contact", label: "Contact" },
-];
-
+// Simplified navbar: only Home and Blog
 const navLinks = [
-  ...sections.slice(0, 5).map((section) => ({
-    href: `#${section.id}`,
-    label: section.label,
-  })),
-  {
-    href: "/blog",
-    label: "Blog",
-  },
-  ...sections.slice(5).map((section) => ({
-    href: `#${section.id}`,
-    label: section.label,
-  })),
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
 ];
 
 export default function Navbar() {
@@ -36,21 +17,9 @@ export default function Navbar() {
       <ul className="flex gap-6 text-base font-medium">
         {navLinks.map((link) => (
           <li key={link.label}>
-            {link.href.startsWith("#") ? (
-              <a
-                href={link.href}
-                className="hover:text-primary transition-colors duration-200"
-              >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                href={link.href}
-                className="hover:text-primary transition-colors duration-200"
-              >
-                {link.label}
-              </Link>
-            )}
+            <Link href={link.href} className="hover:text-primary transition-colors duration-200">
+              {link.label}
+            </Link>
           </li>
         ))}
       </ul>
