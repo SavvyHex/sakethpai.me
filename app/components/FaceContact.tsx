@@ -9,55 +9,53 @@ export default function FaceContact() {
         Let’s connect and collaborate!
       </p>
 
-      <div className="space-y-6 w-full max-w-md">
+      <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-2 gap-6">
         <a
           href="mailto:paisaketh@gmail.com"
-          className="flex items-center justify-center gap-4 hover:text-yellow-300 transition-colors"
+          className="flex items-center justify-start gap-4 hover:text-yellow-300 transition-colors p-3 rounded-md"
         >
           <SiGmail size={28} />
-          <span className="font-medium text-lg text-center">
-            paisaketh@gmail.com
-          </span>
+          <span className="font-medium text-lg">Gmail</span>
         </a>
 
         <a
           href="https://linkedin.com/in/saketh-pai-53704a310"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-4 hover:text-yellow-300 transition-colors"
+          className="flex items-center justify-start gap-4 hover:text-yellow-300 transition-colors p-3 rounded-md"
         >
           <SiLinkedin size={28} />
-          <span className="font-medium text-lg text-center">Saketh Pai</span>
+          <span className="font-medium text-lg">LinkedIn</span>
         </a>
 
         <a
           href="https://github.com/SavvyHex"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-4 hover:text-yellow-300 transition-colors"
+          className="flex items-center justify-start gap-4 hover:text-yellow-300 transition-colors p-3 rounded-md"
         >
           <SiGithub size={28} />
-          <span className="font-medium text-lg text-center">SavvyHex</span>
+          <span className="font-medium text-lg">GitHub</span>
         </a>
 
         <a
           href="https://huggingface.co/SavvyHex"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-4 hover:text-yellow-300 transition-colors"
+          className="flex items-center justify-start gap-4 hover:text-yellow-300 transition-colors p-3 rounded-md"
         >
           <SiHuggingface size={28} />
-          <span className="font-medium text-lg text-center">SavvyHex</span>
+          <span className="font-medium text-lg">HuggingFace</span>
         </a>
 
         <a
           href="https://tryhackme.com/p/SavvyHex"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-4 hover:text-yellow-300 transition-colors"
+          className="flex items-center justify-start gap-4 hover:text-yellow-300 transition-colors p-3 rounded-md"
         >
           <SiTryhackme size={28} />
-          <span className="font-medium text-lg text-center">SavvyHex</span>
+          <span className="font-medium text-lg">TryHackMe</span>
         </a>
       </div>
     </div>
