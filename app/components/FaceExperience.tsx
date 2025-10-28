@@ -13,7 +13,7 @@ export default function FaceExperience() {
             🏆
           </div>
           <div>
-            <h2 className="font-semibold text-xl">Hacknight 3.0</h2>
+            <h2 className="font-semibold text-xl">Hacknight 6.0</h2>
             <p className="text-sm text-white/80">
               Placed <span className="font-bold text-yellow-300">15th</span> out
               of 300 participants (Top 5%) in an overnight hackathon by PES

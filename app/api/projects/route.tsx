@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 const repoNames: string[] = [
   "SavvyHex/SudokuMaster",
-  "acmpesuecc/nexus-framework",
+  "Sabique-Islam/catalyst",
   "SavvyHex/saia",
   "SavvyHex/devcube",
   "SavvyHex/babygit",
