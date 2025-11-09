@@ -39,7 +39,7 @@ export default function FaceExperience() {
 
         <div className="bg-white/10 rounded-2xl p-4 shadow-lg flex items-start gap-4 hover:bg-white/15 transition">
           <div className="w-8 h-8 flex items-center justify-center text-green-300 font-bold text-lg">
-            💻
+            #️⃣
           </div>
           <div>
             <h2 className="font-semibold text-xl">Hashcode 13.0</h2>
