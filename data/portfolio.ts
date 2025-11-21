@@ -35,15 +35,15 @@ export const socialLinks: SocialLink[] = [
 
 export const experiences: Experience[] = [
   // Format:
-  // {
-  //   title: 'Senior Software Engineer',
-  //   company: 'Unicepta',
-  //   location: 'Cologne, Germany',
-  //   startDate: 'Jul 2020',
-  //   endDate: 'Nov 2025',
-  //   description: `Part of Core team working on AI-powered Media & Data Intelligence Solutions. Designed and built microservices for distributed systems, engineered data pipelines on Google Cloud, and wrote full-stack code for front/back/cloud.`,
-  //   type: 'hybrid',
-  // },
+  {
+    title: 'Web Game Developer Intern',
+    company: 'Sri Sathya Sai International Organization',
+    location: 'Bangalore, India',
+    startDate: 'Nov 2025',
+    endDate: 'Jan 2026',
+    description: `Part of Core team working on a web-based game development project. Developed interactive game features using modern web technologies, collaborated with designers to enhance user experience, and ensured cross-platform compatibility.`,
+    type: 'remote',
+  },
 ];
 
 export const skills: SkillCategory[] = [

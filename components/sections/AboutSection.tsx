@@ -22,18 +22,18 @@ export function AboutSection() {
       <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-4 sm:mt-6">
         <div className="bg-black/60 border border-[#177e89]/30 rounded-lg p-2 sm:p-3 backdrop-blur text-center">
           <Trophy size={20} className="text-[#177e89] mx-auto mb-1 sm:mb-2 sm:w-7 sm:h-7" />
-          <div className="text-xl sm:text-2xl font-black text-white">11+</div>
-          <div className="text-[10px] sm:text-xs text-gray-400 uppercase">Years</div>
+          <div className="text-xl sm:text-2xl font-black text-white">2</div>
+          <div className="text-[10px] sm:text-xs text-gray-400 uppercase">Years of learning</div>
         </div>
         <div className="bg-black/60 border border-[#177e89]/30 rounded-lg p-2 sm:p-3 backdrop-blur text-center">
           <Zap size={20} className="text-[#177e89] mx-auto mb-1 sm:mb-2 sm:w-7 sm:h-7" />
-          <div className="text-xl sm:text-2xl font-black text-white">50+</div>
+          <div className="text-xl sm:text-2xl font-black text-white">30+</div>
           <div className="text-[10px] sm:text-xs text-gray-400 uppercase">Projects</div>
         </div>
         <div className="bg-black/60 border border-[#177e89]/30 rounded-lg p-2 sm:p-3 backdrop-blur text-center">
           <Flag size={20} className="text-[#177e89] mx-auto mb-1 sm:mb-2 sm:w-7 sm:h-7" />
-          <div className="text-xl sm:text-2xl font-black text-white">4</div>
-          <div className="text-[10px] sm:text-xs text-gray-400 uppercase">Countries</div>
+          <div className="text-xl sm:text-2xl font-black text-white">500+</div>
+          <div className="text-[10px] sm:text-xs text-gray-400 uppercase">Github Commits</div>
         </div>
       </div>
     </motion.div>
