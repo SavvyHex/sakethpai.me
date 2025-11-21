@@ -15,29 +15,57 @@ const iconMap: { [key: string]: any } = {
 // Component to position car on track based on progress
 function CarOnTrack({ progress }: { progress: number }) {
   // Calculate position along the track path based on progress (0-100)
+  // Following center line of track - matches yellow dashed line
   const getCarPosition = (progress: number) => {
-    // Track path coordinates
+    // Center line coordinates following the track path exactly
     const trackPath = [
-      // Top straight
+      // Top straight (y=150)
       { x: 250, y: 150, angle: 0 },
-      { x: 1350, y: 150, angle: 0 },
-      // Right curve
-      { x: 1435, y: 235, angle: 45 },
-      { x: 1520, y: 320, angle: 90 },
-      // Right straight
+      { x: 600, y: 150, angle: 0 },
+      { x: 950, y: 150, angle: 0 },
+      { x: 1250, y: 150, angle: 0 },
+      
+      // Right turn top
+      { x: 1350, y: 150, angle: 10 },
+      { x: 1430, y: 180, angle: 35 },
+      { x: 1480, y: 240, angle: 60 },
+      { x: 1520, y: 320, angle: 85 },
+      
+      // Right straight (x=1520)
+      { x: 1520, y: 450, angle: 90 },
+      { x: 1520, y: 550, angle: 90 },
+      { x: 1520, y: 650, angle: 90 },
       { x: 1520, y: 780, angle: 90 },
-      // Bottom right curve
-      { x: 1435, y: 865, angle: 135 },
-      { x: 1350, y: 950, angle: 180 },
-      // Bottom straight
+      
+      // Bottom right turn
+      { x: 1520, y: 860, angle: 95 },
+      { x: 1480, y: 910, angle: 125 },
+      { x: 1400, y: 940, angle: 155 },
+      { x: 1350, y: 950, angle: 170 },
+      
+      // Bottom straight (y=950)
+      { x: 1100, y: 950, angle: 180 },
+      { x: 800, y: 950, angle: 180 },
+      { x: 500, y: 950, angle: 180 },
       { x: 250, y: 950, angle: 180 },
-      // Bottom left curve
-      { x: 165, y: 865, angle: 225 },
+      
+      // Bottom left turn
+      { x: 150, y: 950, angle: 190 },
+      { x: 100, y: 910, angle: 215 },
+      { x: 80, y: 850, angle: 245 },
       { x: 80, y: 780, angle: 270 },
-      // Left straight
+      
+      // Left straight (x=80)
+      { x: 80, y: 650, angle: 270 },
+      { x: 80, y: 550, angle: 270 },
+      { x: 80, y: 450, angle: 270 },
       { x: 80, y: 320, angle: 270 },
-      // Top left curve
-      { x: 165, y: 235, angle: 315 },
+      
+      // Top left turn
+      { x: 80, y: 240, angle: 285 },
+      { x: 100, y: 190, angle: 305 },
+      { x: 140, y: 160, angle: 330 },
+      { x: 200, y: 150, angle: 355 },
     ];
 
     const totalPoints = trackPath.length;
@@ -48,10 +76,21 @@ function CarOnTrack({ progress }: { progress: number }) {
     const currentPoint = trackPath[index % totalPoints];
     const nextPoint = trackPath[(index + 1) % totalPoints];
 
-    // Interpolate between points
+    // Smooth interpolation between points
     const x = currentPoint.x + (nextPoint.x - currentPoint.x) * fraction;
     const y = currentPoint.y + (nextPoint.y - currentPoint.y) * fraction;
-    const angle = currentPoint.angle + (nextPoint.angle - currentPoint.angle) * fraction;
+    
+    // Handle angle interpolation to prevent spinning at lap completion
+    let angleDiff = nextPoint.angle - currentPoint.angle;
+    
+    // If we're wrapping from end to start (355° to 0°), adjust the angle difference
+    if (angleDiff > 180) {
+      angleDiff -= 360;
+    } else if (angleDiff < -180) {
+      angleDiff += 360;
+    }
+    
+    const angle = currentPoint.angle + angleDiff * fraction;
 
     return { x, y, angle };
   };
@@ -96,8 +135,8 @@ export default function Home() {
       e.preventDefault();
       
       setScrollProgress((prev) => {
-        // Adjust scroll sensitivity (lower = more sensitive)
-        const sensitivity = 5;
+        // Adjust scroll sensitivity (higher = less sensitive)
+        const sensitivity = 15;
         const newProgress = prev + (e.deltaY / sensitivity);
         
         // Clamp between 0 and total laps * 100
