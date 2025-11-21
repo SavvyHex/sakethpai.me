@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
+  --background: #000000;
+  --foreground: #ffffff;
+  --racing-red: #ff0000;
+  --racing-yellow: #ffff00;
+  --racing-green: #00ff00;
+  --track-gray: #1a1a1a;
+  --asphalt: #0a0a0a;
 }
 
 @theme inline {
@@ -12,6 +15,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-orbitron: var(--font-orbitron);
+  --font-rajdhani: var(--font-rajdhani);
 }
 
 * {
@@ -19,33 +24,94 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--asphalt);
   color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: var(--font-orbitron), var(--font-rajdhani), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Racing theme */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
   background: #0a0a0a;
+  border-left: 2px solid #ff0000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 5px;
+  background: linear-gradient(180deg, #ff0000 0%, #cc0000 100%);
+  border-radius: 6px;
+  border: 2px solid #000;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: linear-gradient(180deg, #ff3333 0%, #ff0000 100%);
 }
 
 /* Selection */
 ::selection {
-  background: #3b82f6;
+  background: #ff0000;
   color: white;
+}
+
+/* Racing grid background */
+.racing-grid {
+  background-image: 
+    linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Speed lines animation */
+@keyframes speedLines {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50px);
+  }
+}
+
+.speed-lines {
+  animation: speedLines 0.5s linear infinite;
+}
+
+/* Checkered flag pattern */
+.checkered-bg {
+  background-image: 
+    linear-gradient(45deg, #1a1a1a 25%, transparent 25%),
+    linear-gradient(-45deg, #1a1a1a 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1a1a1a 75%),
+    linear-gradient(-45deg, transparent 75%, #1a1a1a 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Racing pulse animation */
+@keyframes racingPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 1), 0 0 30px rgba(255, 0, 0, 0.5);
+  }
+}
+
+.racing-pulse {
+  animation: racingPulse 2s ease-in-out infinite;
+}
+
+/* Tire track marks */
+.tire-tracks {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.05) 10px,
+    rgba(255, 255, 255, 0.05) 12px
+  );
 }
