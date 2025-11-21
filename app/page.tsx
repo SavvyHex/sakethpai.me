@@ -523,10 +523,10 @@ export default function Home() {
         <path
           d="M 250,150 L 1350,150 Q 1520,150 1520,320 L 1520,780 Q 1520,950 1350,950 L 250,950 Q 80,950 80,780 L 80,320 Q 80,150 250,150 Z"
           fill="none"
-          stroke="#ffff00"
+          stroke="#ffffff"
           strokeWidth="3"
           strokeDasharray="30,20"
-          opacity="0.7"
+          opacity="0.8"
         />
         
         {/* Start/Finish line */}
