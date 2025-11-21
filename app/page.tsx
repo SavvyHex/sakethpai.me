@@ -12,9 +12,72 @@ const iconMap: { [key: string]: any } = {
   Email: Mail,
 };
 
+// Component to position car on track based on progress
+function CarOnTrack({ progress }: { progress: number }) {
+  // Calculate position along the track path based on progress (0-100)
+  const getCarPosition = (progress: number) => {
+    // Track path coordinates
+    const trackPath = [
+      // Top straight
+      { x: 250, y: 150, angle: 0 },
+      { x: 1350, y: 150, angle: 0 },
+      // Right curve
+      { x: 1435, y: 235, angle: 45 },
+      { x: 1520, y: 320, angle: 90 },
+      // Right straight
+      { x: 1520, y: 780, angle: 90 },
+      // Bottom right curve
+      { x: 1435, y: 865, angle: 135 },
+      { x: 1350, y: 950, angle: 180 },
+      // Bottom straight
+      { x: 250, y: 950, angle: 180 },
+      // Bottom left curve
+      { x: 165, y: 865, angle: 225 },
+      { x: 80, y: 780, angle: 270 },
+      // Left straight
+      { x: 80, y: 320, angle: 270 },
+      // Top left curve
+      { x: 165, y: 235, angle: 315 },
+    ];
+
+    const totalPoints = trackPath.length;
+    const progressIndex = (progress / 100) * totalPoints;
+    const index = Math.floor(progressIndex);
+    const fraction = progressIndex - index;
+
+    const currentPoint = trackPath[index % totalPoints];
+    const nextPoint = trackPath[(index + 1) % totalPoints];
+
+    // Interpolate between points
+    const x = currentPoint.x + (nextPoint.x - currentPoint.x) * fraction;
+    const y = currentPoint.y + (nextPoint.y - currentPoint.y) * fraction;
+    const angle = currentPoint.angle + (nextPoint.angle - currentPoint.angle) * fraction;
+
+    return { x, y, angle };
+  };
+
+  const { x, y, angle } = getCarPosition(progress);
+
+  return (
+    <g transform={`translate(${x}, ${y}) rotate(${angle})`}>
+      {/* NASCAR-style car body */}
+      <rect x="-20" y="-10" width="40" height="20" rx="3" fill="#ff0000" stroke="#000" strokeWidth="1.5" />
+      <rect x="0" y="-7" width="16" height="14" rx="2" fill="#1a1a1a" />
+      <rect x="16" y="-8" width="6" height="16" fill="#ff0000" opacity="0.8" />
+      <rect x="-22" y="-9" width="3" height="18" fill="#ff0000" opacity="0.8" />
+      <circle cx="10" cy="-9" r="3" fill="#1a1a1a" />
+      <circle cx="10" cy="9" r="3" fill="#1a1a1a" />
+      <circle cx="-10" cy="-9" r="3" fill="#1a1a1a" />
+      <circle cx="-10" cy="9" r="3" fill="#1a1a1a" />
+      <text x="8" y="3" fontSize="10" fill="#ffffff" fontWeight="bold" textAnchor="middle">1</text>
+    </g>
+  );
+}
+
 export default function Home() {
   const [currentLap, setCurrentLap] = useState(0);
   const [lapProgress, setLapProgress] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const totalLaps = 6;
 
   // Sections data
@@ -27,23 +90,33 @@ export default function Home() {
     { id: 5, title: 'CONTACT', subtitle: 'Get in Touch', icon: Mail },
   ];
 
-  // Auto-advance through laps
+  // Scroll-controlled laps
   useEffect(() => {
-    const lapDuration = 8000; // 8 seconds per lap
-    const updateInterval = 50; // Update every 50ms for smooth animation
-
-    const interval = setInterval(() => {
-      setLapProgress((prev) => {
-        const newProgress = prev + (updateInterval / lapDuration) * 100;
-        if (newProgress >= 100) {
-          setCurrentLap((lap) => (lap + 1) % totalLaps);
-          return 0;
-        }
-        return newProgress;
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      
+      setScrollProgress((prev) => {
+        // Adjust scroll sensitivity (lower = more sensitive)
+        const sensitivity = 5;
+        const newProgress = prev + (e.deltaY / sensitivity);
+        
+        // Clamp between 0 and total laps * 100
+        const maxProgress = totalLaps * 100;
+        const clampedProgress = Math.max(0, Math.min(maxProgress, newProgress));
+        
+        // Calculate current lap and lap progress
+        const lap = Math.floor(clampedProgress / 100);
+        const progress = clampedProgress % 100;
+        
+        setCurrentLap(Math.min(lap, totalLaps - 1));
+        setLapProgress(progress);
+        
+        return clampedProgress;
       });
-    }, updateInterval);
+    };
 
-    return () => clearInterval(interval);
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    return () => window.removeEventListener('wheel', handleWheel);
   }, [totalLaps]);
 
   // Render content based on current lap
@@ -308,29 +381,8 @@ export default function Home() {
         <rect x="250" y="70" width="20" height="160" fill="black" opacity="0.2" />
         <rect x="270" y="70" width="20" height="160" fill="white" opacity="0.2" />
         
-        {/* Animated racing car - follows NASCAR oval path */}
-        <g>
-          <animateMotion
-            dur="8s"
-            repeatCount="indefinite"
-            rotate="auto"
-            path="M 250,150 L 1350,150 Q 1520,150 1520,320 L 1520,780 Q 1520,950 1350,950 L 250,950 Q 80,950 80,780 L 80,320 Q 80,150 250,150 Z"
-          >
-            <mpath href="#trackPath" />
-          </animateMotion>
-          <g transform="translate(0, 0)">
-            {/* NASCAR-style car body */}
-            <rect x="-20" y="-10" width="40" height="20" rx="3" fill="#ff0000" stroke="#000" strokeWidth="1.5" />
-            <rect x="0" y="-7" width="16" height="14" rx="2" fill="#1a1a1a" />
-            <rect x="16" y="-8" width="6" height="16" fill="#ff0000" opacity="0.8" />
-            <rect x="-22" y="-9" width="3" height="18" fill="#ff0000" opacity="0.8" />
-            <circle cx="10" cy="-9" r="3" fill="#1a1a1a" />
-            <circle cx="10" cy="9" r="3" fill="#1a1a1a" />
-            <circle cx="-10" cy="-9" r="3" fill="#1a1a1a" />
-            <circle cx="-10" cy="9" r="3" fill="#1a1a1a" />
-            <text x="8" y="3" fontSize="10" fill="#ffffff" fontWeight="bold" textAnchor="middle">1</text>
-          </g>
-        </g>
+        {/* Scroll-controlled racing car */}
+        <CarOnTrack progress={lapProgress} />
       </svg>
 
       {/* Content in center of track - constrained to track interior */}
