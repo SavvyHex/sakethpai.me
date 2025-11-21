@@ -264,14 +264,14 @@ export default function Home() {
       {/* Racing Grid Background */}
       <div className="absolute inset-0 racing-grid opacity-10 pointer-events-none" />
 
-      {/* Race Track SVG - NASCAR Oval Style */}
+      {/* Race Track SVG - NASCAR Oval Style - Wider and taller oval */}
       <svg
-        viewBox="0 0 1000 1000"
-        className="absolute inset-0 w-full h-full"
+        viewBox="0 0 1600 1100"
+        className="absolute inset-0 w-full h-full p-8"
       >
         {/* Track outer border - NASCAR oval shape */}
         <path
-          d="M 250,300 L 750,300 Q 850,300 850,400 L 850,600 Q 850,700 750,700 L 250,700 Q 150,700 150,600 L 150,400 Q 150,300 250,300 Z"
+          d="M 250,150 L 1350,150 Q 1520,150 1520,320 L 1520,780 Q 1520,950 1350,950 L 250,950 Q 80,950 80,780 L 80,320 Q 80,150 250,150 Z"
           fill="none"
           stroke="#666"
           strokeWidth="4"
@@ -279,15 +279,15 @@ export default function Home() {
         />
         {/* Track surface */}
         <path
-          d="M 250,300 L 750,300 Q 850,300 850,400 L 850,600 Q 850,700 750,700 L 250,700 Q 150,700 150,600 L 150,400 Q 150,300 250,300 Z"
+          d="M 250,150 L 1350,150 Q 1520,150 1520,320 L 1520,780 Q 1520,950 1350,950 L 250,950 Q 80,950 80,780 L 80,320 Q 80,150 250,150 Z"
           fill="none"
           stroke="#333"
-          strokeWidth="140"
+          strokeWidth="160"
           opacity="0.6"
         />
         {/* Track inner border */}
         <path
-          d="M 250,300 L 750,300 Q 850,300 850,400 L 850,600 Q 850,700 750,700 L 250,700 Q 150,700 150,600 L 150,400 Q 150,300 250,300 Z"
+          d="M 250,150 L 1350,150 Q 1520,150 1520,320 L 1520,780 Q 1520,950 1350,950 L 250,950 Q 80,950 80,780 L 80,320 Q 80,150 250,150 Z"
           fill="none"
           stroke="#555"
           strokeWidth="2"
@@ -295,7 +295,7 @@ export default function Home() {
         />
         {/* Center line dashes */}
         <path
-          d="M 250,300 L 750,300 Q 850,300 850,400 L 850,600 Q 850,700 750,700 L 250,700 Q 150,700 150,600 L 150,400 Q 150,300 250,300 Z"
+          d="M 250,150 L 1350,150 Q 1520,150 1520,320 L 1520,780 Q 1520,950 1350,950 L 250,950 Q 80,950 80,780 L 80,320 Q 80,150 250,150 Z"
           fill="none"
           stroke="#ffff00"
           strokeWidth="3"
@@ -304,9 +304,9 @@ export default function Home() {
         />
         
         {/* Start/Finish line */}
-        <rect x="240" y="230" width="20" height="140" fill="white" opacity="0.2" />
-        <rect x="260" y="230" width="20" height="140" fill="black" opacity="0.2" />
-        <rect x="280" y="230" width="20" height="140" fill="white" opacity="0.2" />
+        <rect x="230" y="70" width="20" height="160" fill="white" opacity="0.2" />
+        <rect x="250" y="70" width="20" height="160" fill="black" opacity="0.2" />
+        <rect x="270" y="70" width="20" height="160" fill="white" opacity="0.2" />
         
         {/* Animated racing car - follows NASCAR oval path */}
         <g>
@@ -314,7 +314,7 @@ export default function Home() {
             dur="8s"
             repeatCount="indefinite"
             rotate="auto"
-            path="M 250,300 L 750,300 Q 850,300 850,400 L 850,600 Q 850,700 750,700 L 250,700 Q 150,700 150,600 L 150,400 Q 150,300 250,300 Z"
+            path="M 250,150 L 1350,150 Q 1520,150 1520,320 L 1520,780 Q 1520,950 1350,950 L 250,950 Q 80,950 80,780 L 80,320 Q 80,150 250,150 Z"
           >
             <mpath href="#trackPath" />
           </animateMotion>
