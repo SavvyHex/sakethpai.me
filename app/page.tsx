@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Navigation from '@/components/Navigation';
 import { personalInfo, experiences, skills, education, languages, socialLinks } from '@/data/portfolio';
 import { Github, Linkedin, Twitter, Mail, Flag, Zap, Trophy, ChevronRight, GraduationCap, Briefcase, Code } from 'lucide-react';
 
@@ -308,9 +307,6 @@ export default function Home() {
           </g>
         </g>
       </svg>
-
-      {/* Navigation */}
-      <Navigation />
 
       {/* Content in center of track */}
       <div className="absolute inset-0 flex items-center justify-center z-10 p-8">
