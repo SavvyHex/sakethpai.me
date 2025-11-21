@@ -1,15 +1,28 @@
 'use client';
 
 import { CarOnTrack } from './CarOnTrack';
+import { useEffect, useState } from 'react';
 
 interface RaceTrackProps {
   trackIndex: number;
 }
 
 export function RaceTrack({ trackIndex }: RaceTrackProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <svg
-      viewBox="0 0 1600 1100"
+      viewBox={isMobile ? "0 -100 1600 1300" : "0 0 1600 1100"}
       className="absolute inset-0 w-full h-full p-0 sm:p-6 md:p-8 rotate-90 sm:rotate-0"
       preserveAspectRatio="xMidYMid meet"
     >
