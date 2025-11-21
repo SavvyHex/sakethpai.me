@@ -98,7 +98,12 @@ function CarOnTrack({ progress }: { progress: number }) {
   const { x, y, angle } = getCarPosition(progress);
 
   return (
-    <g transform={`translate(${x}, ${y}) rotate(${angle})`}>
+    <g 
+      transform={`translate(${x}, ${y}) rotate(${angle})`}
+      style={{
+        transition: 'transform 0.1s ease-out',
+      }}
+    >
       {/* NASCAR-style car body */}
       <rect x="-20" y="-10" width="40" height="20" rx="3" fill="#ff0000" stroke="#000" strokeWidth="1.5" />
       <rect x="0" y="-7" width="16" height="14" rx="2" fill="#1a1a1a" />
