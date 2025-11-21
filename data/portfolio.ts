@@ -10,26 +10,26 @@ import {
 } from '@/types';
 
 export const personalInfo: PersonalInfo = {
-  name: 'Your Name',
-  title: 'Senior Software Engineer',
-  location: 'Munich, Germany',
+  name: 'Saketh Pai',
+  title: 'Cybersecurity Enthusiast',
+  location: 'Bangalore, India',
   bio: `Highly experienced and dynamic software engineer with a rich professional background spanning over 11 years. Throughout my career, I've held positions in renowned tech companies across Albania, France, USA, and Germany. My contributions have been pivotal in designing and constructing microservices for distributed systems, implementing data pipelines on Google Cloud, and engaging in full-stack development.`,
   avatar: '/images/avatar.png', // Add your avatar image to public/images/
-  email: 'your.email@example.com',
+  email: 'hello@sakethpai.me',
 };
 
 export const socialLinks: SocialLink[] = [
   {
     name: 'GitHub',
-    url: 'https://github.com/yourusername',
+    url: 'https://github.com/SavvyHex',
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/yourusername',
+    url: 'https://www.linkedin.com/in/saketh-pai-53704a310/',
   },
   {
     name: 'Twitter',
-    url: 'https://twitter.com/yourusername',
+    url: 'https://x.com/InitFailure',
   },
 ];
 
