@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { education, languages } from '@/data/portfolio';
+import { education } from '@/data/portfolio';
 
 export function EducationSection() {
   return (
@@ -20,19 +20,14 @@ export function EducationSection() {
           <div key={idx} className="bg-black/60 border border-[#177e89]/30 rounded-lg p-2.5 sm:p-3 backdrop-blur">
             <h3 className="text-base sm:text-lg font-bold text-white mb-1">{edu.degree}</h3>
             <p className="text-[#177e89] font-semibold mb-1 text-xs sm:text-sm">{edu.institution}</p>
-            <p className="text-[10px] sm:text-xs text-gray-400">{edu.startYear} - {edu.endYear} • {edu.location}</p>
+            <div className="flex justify-between items-center">
+              <p className="text-[10px] sm:text-xs text-gray-400">{edu.startYear} - {edu.endYear} • {edu.location}</p>
+              {edu.grade && (
+                <p className="text-[10px] sm:text-xs font-semibold text-[#177e89]">{edu.grade}</p>
+              )}
+            </div>
           </div>
         ))}
-        <div className="bg-black/60 border border-[#177e89]/30 rounded-lg p-2.5 sm:p-3 backdrop-blur">
-          <h3 className="text-base sm:text-lg font-bold text-white mb-1.5 sm:mb-2">Languages</h3>
-          <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            {languages.map((lang, idx) => (
-              <span key={idx} className="px-2 sm:px-3 py-0.5 sm:py-1 bg-black/40 border border-[#177e89]/30 rounded-full text-[10px] sm:text-xs text-gray-300">
-                {lang.name}
-              </span>
-            ))}
-          </div>
-        </div>
       </div>
     </motion.div>
   );

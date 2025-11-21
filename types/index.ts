@@ -27,6 +27,7 @@ export interface Education {
   startYear: string;
   endYear: string;
   location: string;
+  grade?: string; // Percentage or GPA
 }
 
 export interface Language {

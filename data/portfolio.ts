@@ -84,6 +84,7 @@ export const education: Education[] = [
     startYear: '2016',
     endYear: '2022',
     location: 'Bangalore, India',
+    grade: '94.6%',
   },
     {
     degree: '12th Grade',
@@ -91,6 +92,7 @@ export const education: Education[] = [
     startYear: '2022',
     endYear: '2024',
     location: 'Bangalore, India',
+    grade: '92.4%',
   },
     {
     degree: 'Bachelor of Technology in Computer Science',
@@ -98,6 +100,7 @@ export const education: Education[] = [
     startYear: '2024',
     endYear: '2028',
     location: 'Bangalore, India',
+    grade: '8.02 GPA',
   },
 ];
 
