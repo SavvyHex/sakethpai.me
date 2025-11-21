@@ -12,35 +12,34 @@ const iconMap: { [key: string]: any } = {
   Email: Mail,
 };
 
-// Component to position car on track based on track index
-function CarOnTrack({ trackIndex }: { trackIndex: number }) {
-  const prevAngleRef = useRef(0);
-
-  // Center line coordinates following the track path exactly
-  const trackPath = [
-    // Top straight (y=150)
-    { x: 250, y: 150 },
-    { x: 300, y: 150 },
-    { x: 350, y: 150 },
-    { x: 400, y: 150 },
-    { x: 450, y: 150 },
-    { x: 500, y: 150 },
-    { x: 550, y: 150 },
+// Define track path once - shared between components
+const TRACK_PATH = [
+    // Top straight (y=150) - starting at finish line
+    { x: 240, y: 150 },
+    { x: 280, y: 150 },
+    { x: 320, y: 150 },
+    { x: 440, y: 150 },
+    { x: 480, y: 150 },
+    { x: 520, y: 150 },
+    { x: 560, y: 150 },
     { x: 600, y: 150 },
-    { x: 650, y: 150 },
-    { x: 700, y: 150 },
-    { x: 750, y: 150 },
+    { x: 640, y: 150 },
+    { x: 680, y: 150 },
+    { x: 720, y: 150 },
+    { x: 760, y: 150 },
     { x: 800, y: 150 },
-    { x: 850, y: 150 },
-    { x: 900, y: 150 },
-    { x: 950, y: 150 },
+    { x: 840, y: 150 },
+    { x: 880, y: 150 },
+    { x: 920, y: 150 },
+    { x: 960, y: 150 },
     { x: 1000, y: 150 },
-    { x: 1050, y: 150 },
-    { x: 1100, y: 150 },
-    { x: 1150, y: 150 },
+    { x: 1040, y: 150 },
+    { x: 1080, y: 150 },
+    { x: 1120, y: 150 },
+    { x: 1160, y: 150 },
     { x: 1200, y: 150 },
-    { x: 1250, y: 150 },
-    { x: 1300, y: 150 },
+    { x: 1240, y: 150 },
+    { x: 1280, y: 150 },
     
     // Right turn top
     { x: 1350, y: 150 },
@@ -116,7 +115,7 @@ function CarOnTrack({ trackIndex }: { trackIndex: number }) {
     { x: 80, y: 380 },
     { x: 80, y: 330 },
     
-    // Top left turn
+    // Top left turn - back to start/finish line
     { x: 80, y: 290 },
     { x: 90, y: 255 },
     { x: 105, y: 220 },
@@ -124,15 +123,20 @@ function CarOnTrack({ trackIndex }: { trackIndex: number }) {
     { x: 160, y: 170 },
     { x: 190, y: 158 },
     { x: 220, y: 152 },
-  ];
+    { x: 240, y: 150 }, // Complete the loop at start/finish
+];
 
-  const totalPoints = trackPath.length;
+// Component to position car on track based on track index
+function CarOnTrack({ trackIndex }: { trackIndex: number }) {
+  const prevAngleRef = useRef(0);
+
+  const totalPoints = TRACK_PATH.length;
   const index = Math.floor(trackIndex) % totalPoints;
   const nextIndex = (index + 1) % totalPoints;
   const fraction = trackIndex - Math.floor(trackIndex);
 
-  const currentPoint = trackPath[index];
-  const nextPoint = trackPath[nextIndex];
+  const currentPoint = TRACK_PATH[index];
+  const nextPoint = TRACK_PATH[nextIndex];
 
   // Smooth interpolation between points
   const x = currentPoint.x + (nextPoint.x - currentPoint.x) * fraction;
@@ -178,7 +182,7 @@ export default function Home() {
   const [currentLap, setCurrentLap] = useState(0);
   const [trackIndex, setTrackIndex] = useState(0);
   const totalLaps = 6;
-  const totalTrackPoints = 107; // Total points in the track path
+  const totalTrackPoints = TRACK_PATH.length;
 
   // Sections data
   const sections = [
