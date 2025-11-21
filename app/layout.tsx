@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
+import { Geist, Geist_Mono, Orbitron, Rajdhani } from "next/font/google";
 import "./globals.css";
-import { Exo_2 } from "next/font/google";
-import Navbar from "./components/Navbar";
 
-const exo2 = Exo_2({
-  weight: ["400", "700"], // Add more weights if you want
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const rajdhani = Rajdhani({
+  variable: "--font-rajdhani",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "Saketh Pai | Portfolio",
-  description: "Portfolio website of Saketh Sunil Pai",
+  title: "Your Name - Racing Portfolio",
+  description: "Software Engineer Portfolio - Racing themed showcase of work, experience, and skills",
 };
 
 export default function RootLayout({
@@ -21,15 +37,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${exo2.className} antialiased`}
-        style={
-          {
-            "--font-exo2": exo2.style.fontFamily,
-          } as React.CSSProperties
-        }
+        className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${rajdhani.variable} antialiased`}
       >
-        <Navbar />
-        <div className="pt-20">{children}</div>
+        {children}
       </body>
     </html>
   );

@@ -1,143 +1,117 @@
-/* Spoiler styling for blog posts */
-.spoiler {
-  background: #444;
-  color: #444;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 0 0.3em;
-  transition: all 0.2s;
-  user-select: none;
-}
-.spoiler.revealed,
-.spoiler:active,
-.spoiler:focus {
-  color: inherit;
-  background: none;
-}
-
 @import "tailwindcss";
-@import "devicon/devicon.min.css";
-
-/* Ensure prose styling works correctly with higher specificity */
-.prose h1, 
-.prose h2, 
-.prose h3, 
-.prose h4, 
-.prose h5, 
-.prose h6 {
-  color: inherit !important;
-  font-weight: bold !important;
-  margin-top: 1.5em !important;
-  margin-bottom: 0.5em !important;
-  line-height: 1.2 !important;
-}
-
-.prose h1 { 
-  font-size: 2.25em !important; 
-  border-bottom: 2px solid #38bdf8;
-  padding-bottom: 0.3em;
-}
-.prose h2 { 
-  font-size: 1.875em !important; 
-  border-bottom: 1px solid #64748b;
-  padding-bottom: 0.2em;
-}
-.prose h3 { 
-  font-size: 1.5em !important; 
-  color: #38bdf8 !important;
-}
-
-.prose p {
-  margin-top: 1em !important;
-  margin-bottom: 1em !important;
-  line-height: 1.6 !important;
-}
-
-.prose ol, .prose ul {
-  margin-top: 1em !important;
-  margin-bottom: 1em !important;
-  padding-left: 1.5em !important;
-}
-
-.prose li {
-  margin-top: 0.25em !important;
-  margin-bottom: 0.25em !important;
-}
-
-.prose code {
-  background-color: #374151 !important;
-  color: #f9fafb !important;
-  padding: 0.125rem 0.25rem !important;
-  border-radius: 0.25rem !important;
-  font-size: 0.875em !important;
-  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace !important;
-}
-
-.prose pre {
-  background-color: #1f2937 !important;
-  color: #f9fafb !important;
-  padding: 1rem !important;
-  border-radius: 0.5rem !important;
-  overflow-x: auto !important;
-  margin-top: 1em !important;
-  margin-bottom: 1em !important;
-}
-
-.prose pre code {
-  background-color: transparent !important;
-  padding: 0 !important;
-}
-
-.prose img {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  border-radius: 0.5rem;
-}
-
-.prose a {
-  color: #60a5fa;
-  text-decoration: underline;
-}
-
-.prose a:hover {
-  color: #93c5fd;
-}
-
-.prose strong {
-  font-weight: bold;
-}
-
-.face-glow {
-  border: 2px solid #38bdf8;
-  transition: box-shadow 0.3s;
-}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  /* Custom Colors */
-  --face-intro: #0f172a;
-  --face-education: #2563eb;
-  --face-projects: #14b8a6;
-  --face-skills: #0d9488;
-  --face-experience: #8b5cf6;
-  --face-contact: #f43f5e;
-  /* Face Size */
-  --face-size: min(75vw, 75vh); /* keeps it square and fitting screen */
+  --background: #000000;
+  --foreground: #ffffff;
+  --racing-red: #ff0000;
+  --racing-yellow: #ffff00;
+  --racing-green: #00ff00;
+  --track-gray: #1a1a1a;
+  --asphalt: #0a0a0a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-orbitron: var(--font-orbitron);
+  --font-rajdhani: var(--font-rajdhani);
+}
+
+* {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background: var(--asphalt);
   color: var(--foreground);
+  font-family: var(--font-orbitron), var(--font-rajdhani), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-.cube-container {
-  perspective: calc(var(--face-size) * 3);
+/* Custom scrollbar - Racing theme */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border-left: 2px solid #ff0000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff0000 0%, #cc0000 100%);
+  border-radius: 6px;
+  border: 2px solid #000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff3333 0%, #ff0000 100%);
+}
+
+/* Selection */
+::selection {
+  background: #ff0000;
+  color: white;
+}
+
+/* Racing grid background */
+.racing-grid {
+  background-image: 
+    linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Speed lines animation */
+@keyframes speedLines {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50px);
+  }
+}
+
+.speed-lines {
+  animation: speedLines 0.5s linear infinite;
+}
+
+/* Checkered flag pattern */
+.checkered-bg {
+  background-image: 
+    linear-gradient(45deg, #1a1a1a 25%, transparent 25%),
+    linear-gradient(-45deg, #1a1a1a 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1a1a1a 75%),
+    linear-gradient(-45deg, transparent 75%, #1a1a1a 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Racing pulse animation */
+@keyframes racingPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 1), 0 0 30px rgba(255, 0, 0, 0.5);
+  }
+}
+
+.racing-pulse {
+  animation: racingPulse 2s ease-in-out infinite;
+}
+
+/* Tire track marks */
+.tire-tracks {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.05) 10px,
+    rgba(255, 255, 255, 0.05) 12px
+  );
 }
