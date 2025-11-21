@@ -1,19 +1,44 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
   --teal: #177e89ff;
   --dark-teal: #084c61ff;
   --scarlet-rush: #db3a34ff;
   --golden-pollen: #ffc857ff;
+}
+
+/* Dark mode (default) */
+:root,
+html[data-theme="dark"] {
+  --background: #000000;
+  --foreground: #ffffff;
   --track-gray: #1a1a1a;
   --asphalt: #0a0a0a;
+  --scrollbar-track: #0a0a0a;
+  --scrollbar-thumb-border: #000;
+  --grid-overlay: rgba(23, 126, 137, 0.1);
+  --checkered-dark: #1a1a1a;
+  --tire-track: rgba(255, 255, 255, 0.05);
+}
+
+/* Light mode */
+html[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --track-gray: #e5e5e5;
+  --asphalt: #f5f5f5;
+  --scrollbar-track: #f5f5f5;
+  --scrollbar-thumb-border: #fff;
+  --grid-overlay: rgba(23, 126, 137, 0.15);
+  --checkered-dark: #e5e5e5;
+  --tire-track: rgba(0, 0, 0, 0.05);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-track-gray: var(--track-gray);
+  --color-asphalt: var(--asphalt);
   --font-sans: var(--font-source-sans);
   --font-display: var(--font-oswald);
 }
@@ -46,14 +71,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: var(--scrollbar-track);
   border-left: 2px solid var(--teal);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--teal);
   border-radius: 6px;
-  border: 2px solid #000;
+  border: 2px solid var(--scrollbar-thumb-border);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -69,8 +94,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Racing grid background */
 .racing-grid {
   background-image: 
-    linear-gradient(rgba(23, 126, 137, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23, 126, 137, 0.1) 1px, transparent 1px);
+    linear-gradient(var(--grid-overlay) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-overlay) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
@@ -91,10 +116,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Checkered flag pattern */
 .checkered-bg {
   background-image: 
-    linear-gradient(45deg, #1a1a1a 25%, transparent 25%),
-    linear-gradient(-45deg, #1a1a1a 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #1a1a1a 75%),
-    linear-gradient(-45deg, transparent 75%, #1a1a1a 75%);
+    linear-gradient(45deg, var(--checkered-dark) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--checkered-dark) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--checkered-dark) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--checkered-dark) 75%);
   background-size: 20px 20px;
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
 }
@@ -119,8 +144,8 @@ h1, h2, h3, h4, h5, h6 {
     90deg,
     transparent,
     transparent 10px,
-    rgba(255, 255, 255, 0.05) 10px,
-    rgba(255, 255, 255, 0.05) 12px
+    var(--tire-track) 10px,
+    var(--tire-track) 12px
   );
 }
 

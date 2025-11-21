@@ -23,7 +23,7 @@ export function NavigationDots({ sections, currentLap, onNavigate }: NavigationD
           className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
             currentLap === section.id
               ? 'bg-[#177e89] scale-125'
-              : 'bg-gray-600 hover:bg-[#177e89]'
+              : 'bg-foreground/40 hover:bg-[#177e89]'
           }`}
           title={section.title}
           aria-label={section.title}

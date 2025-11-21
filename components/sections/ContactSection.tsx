@@ -23,10 +23,10 @@ export function ContactSection() {
       <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-[#177e89] flex items-center justify-center border-2 sm:border-4 border-[#084c61] shadow-2xl shadow-[#177e89]/50">
         <Flag size={32} className="text-[#084c61] sm:w-10 sm:h-10" fill="currentColor" />
       </div>
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-black">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
         GET IN TOUCH
       </h2>
-      <p className="text-xs sm:text-sm text-gray-400">Let's build something amazing together</p>
+      <p className="text-xs sm:text-sm text-foreground/50">Let's build something amazing together</p>
       <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
         {socialLinks.map((link) => {
           const Icon = iconMap[link.name] || Mail;
@@ -36,10 +36,10 @@ export function ContactSection() {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-black/60 border-2 border-[#177e89]/30 rounded-lg hover:border-[#177e89] hover:bg-[#177e89]/20 transition-all duration-300 group backdrop-blur"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-track-gray/60 border-2 border-[#177e89]/30 rounded-lg hover:border-[#177e89] hover:bg-[#177e89]/20 transition-all duration-300 group backdrop-blur"
             >
-              <Icon size={16} className="text-gray-400 group-hover:text-[#177e89] transition-colors sm:w-5 sm:h-5" />
-              <span className="text-xs sm:text-sm text-gray-300 group-hover:text-white font-medium">{link.name}</span>
+              <Icon size={16} className="text-foreground/50 group-hover:text-[#177e89] transition-colors sm:w-5 sm:h-5" />
+              <span className="text-xs sm:text-sm text-foreground/70 group-hover:text-foreground font-medium">{link.name}</span>
             </a>
           );
         })}

@@ -7,8 +7,8 @@ interface SpeedometerProps {
 
 export function Speedometer({ speed, maxSpeed = 400 }: SpeedometerProps) {
   return (
-    <div className="fixed bottom-4 left-4 sm:bottom-8 sm:left-8 z-50 bg-black/90 border-2 border-[#177e89] rounded-lg p-2 sm:p-4 backdrop-blur-sm">
-      <div className="text-[10px] sm:text-xs text-gray-400 mb-1 sm:mb-2 font-bold uppercase text-center">
+    <div className="fixed bottom-4 left-4 sm:bottom-8 sm:left-8 z-50 bg-asphalt/90 border-2 border-[#177e89] rounded-lg p-2 sm:p-4 backdrop-blur-sm">
+      <div className="text-[10px] sm:text-xs text-foreground/50 mb-1 sm:mb-2 font-bold uppercase text-center">
         SPEED
       </div>
       <div className="relative w-20 h-20 sm:w-32 sm:h-32">
@@ -19,7 +19,7 @@ export function Speedometer({ speed, maxSpeed = 400 }: SpeedometerProps) {
             cy="50"
             r="40"
             fill="none"
-            stroke="#1a1a1a"
+            stroke="var(--track-gray)"
             strokeWidth="8"
           />
           {/* Speed indicator circle - fills based on speed */}
@@ -41,7 +41,7 @@ export function Speedometer({ speed, maxSpeed = 400 }: SpeedometerProps) {
           <div className="text-xl sm:text-3xl font-black text-[#177e89]">
             {Math.round(speed)}
           </div>
-          <div className="text-[7px] sm:text-[8px] text-gray-500 uppercase">KM/H</div>
+          <div className="text-[7px] sm:text-[8px] text-foreground/40 uppercase">KM/H</div>
         </div>
       </div>
     </div>

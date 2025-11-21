@@ -167,7 +167,7 @@ export default function Home() {
   };
 
   return (
-    <div className="fixed inset-0 bg-black text-white overflow-hidden">
+    <div className="fixed inset-0 bg-asphalt text-foreground overflow-hidden">
       {/* Racing Grid Background */}
       <div className="absolute inset-0 racing-grid opacity-10 pointer-events-none" />
 

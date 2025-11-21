@@ -54,16 +54,16 @@ export function RaceTrack({ trackIndex }: RaceTrackProps) {
       <path
         d="M 250,150 L 1350,150 Q 1520,150 1520,320 L 1520,780 Q 1520,950 1350,950 L 250,950 Q 80,950 80,780 L 80,320 Q 80,150 250,150 Z"
         fill="none"
-        stroke="#ffffff"
+        stroke="var(--foreground)"
         strokeWidth="3"
         strokeDasharray="30,20"
-        opacity="0.8"
+        opacity="0.4"
       />
       
       {/* Start/Finish line */}
-      <rect x="230" y="70" width="20" height="160" fill="white" opacity="0.2" />
-      <rect x="250" y="70" width="20" height="160" fill="black" opacity="0.2" />
-      <rect x="270" y="70" width="20" height="160" fill="white" opacity="0.2" />
+      <rect x="230" y="70" width="20" height="160" fill="var(--foreground)" opacity="0.2" />
+      <rect x="250" y="70" width="20" height="160" fill="var(--asphalt)" opacity="0.4" />
+      <rect x="270" y="70" width="20" height="160" fill="var(--foreground)" opacity="0.2" />
       
       {/* Scroll-controlled racing car */}
       <CarOnTrack trackIndex={trackIndex} />
