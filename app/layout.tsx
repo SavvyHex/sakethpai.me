@@ -15,8 +15,8 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "Your Name - Racing Portfolio",
-  description: "Software Engineer Portfolio - Racing themed showcase of work, experience, and skills",
+  title: "Saketh Pai | Cybersecurity & Full-Stack Developer",
+  description: "Passionate cybersecurity enthusiast and full-stack developer specializing in secure web applications, AI/ML integration, and threat detection.",
 };
 
 export default function RootLayout({
