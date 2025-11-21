@@ -35,6 +35,7 @@ export default function Home() {
   const lastUpdateTimeRef = useRef(Date.now());
   const lastScrollEventRef = useRef(Date.now());
   const scrollSpeedDecayRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartRef = useRef(0);
 
   // Scroll-controlled laps - incrementally move car along track with infinite looping
   useEffect(() => {
@@ -65,9 +66,49 @@ export default function Home() {
       });
     };
 
+    // Touch event handlers for mobile
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartRef.current = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      const touchY = e.touches[0].clientY;
+      const deltaY = touchStartRef.current - touchY;
+      touchStartRef.current = touchY;
+
+      // Accumulate scroll distance
+      scrollAccumulatorRef.current += Math.abs(deltaY);
+      
+      // Update last scroll event time
+      lastScrollEventRef.current = Date.now();
+      
+      setTrackIndex((prev) => {
+        // Adjust scroll sensitivity for touch (higher = less sensitive)
+        const sensitivity = 15; // More sensitive for touch
+        const increment = deltaY / sensitivity;
+        const newIndex = prev + increment;
+        
+        // Calculate current lap based on track position
+        const positionInCycle = newIndex % (totalLaps * totalTrackPoints);
+        const normalizedPosition = positionInCycle < 0 
+          ? positionInCycle + (totalLaps * totalTrackPoints)
+          : positionInCycle;
+        const lap = Math.floor(normalizedPosition / totalTrackPoints) % totalLaps;
+        
+        setCurrentLap(lap);
+        return newIndex;
+      });
+    };
+
     window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    
     return () => {
       window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
   }, [totalLaps, totalTrackPoints]);
 
@@ -135,7 +176,7 @@ export default function Home() {
 
       {/* Content in center of track - constrained to track interior */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="w-full max-w-2xl px-20 py-16 flex items-center justify-center">
+        <div className="w-full max-w-2xl px-12 sm:px-8 md:px-12 lg:px-20 py-16 sm:py-12 md:py-16 flex items-center justify-center">
           <AnimatePresence mode="wait">
             {renderContent()}
           </AnimatePresence>

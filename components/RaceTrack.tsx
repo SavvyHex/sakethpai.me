@@ -10,7 +10,8 @@ export function RaceTrack({ trackIndex }: RaceTrackProps) {
   return (
     <svg
       viewBox="0 0 1600 1100"
-      className="absolute inset-0 w-full h-full p-8"
+      className="absolute inset-0 w-full h-full p-0 sm:p-6 md:p-8 rotate-90 sm:rotate-0"
+      preserveAspectRatio="xMidYMid meet"
     >
       {/* Track outer border - NASCAR oval shape */}
       <path

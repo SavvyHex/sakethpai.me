@@ -7,11 +7,11 @@ interface SpeedometerProps {
 
 export function Speedometer({ speed, maxSpeed = 400 }: SpeedometerProps) {
   return (
-    <div className="fixed bottom-8 left-8 z-50 bg-black/90 border-2 border-[#177e89] rounded-lg p-4 backdrop-blur-sm">
-      <div className="text-xs text-gray-400 mb-2 font-bold uppercase text-center">
+    <div className="fixed bottom-4 left-4 sm:bottom-8 sm:left-8 z-50 bg-black/90 border-2 border-[#177e89] rounded-lg p-2 sm:p-4 backdrop-blur-sm">
+      <div className="text-[10px] sm:text-xs text-gray-400 mb-1 sm:mb-2 font-bold uppercase text-center">
         SPEED
       </div>
-      <div className="relative w-32 h-32">
+      <div className="relative w-20 h-20 sm:w-32 sm:h-32">
         <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
           {/* Speedometer background circle */}
           <circle
@@ -38,10 +38,10 @@ export function Speedometer({ speed, maxSpeed = 400 }: SpeedometerProps) {
         </svg>
         {/* Speed value in center */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className="text-3xl font-black text-[#177e89]">
+          <div className="text-xl sm:text-3xl font-black text-[#177e89]">
             {Math.round(speed)}
           </div>
-          <div className="text-[8px] text-gray-500 uppercase">KM/H</div>
+          <div className="text-[7px] sm:text-[8px] text-gray-500 uppercase">KM/H</div>
         </div>
       </div>
     </div>

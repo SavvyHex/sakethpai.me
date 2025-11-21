@@ -19,6 +19,13 @@ export const metadata: Metadata = {
   description: "Passionate cybersecurity enthusiast and full-stack developer specializing in secure web applications, AI/ML integration, and threat detection.",
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
