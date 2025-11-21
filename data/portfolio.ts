@@ -11,11 +11,9 @@ import {
 
 export const personalInfo: PersonalInfo = {
   name: 'Your Name',
-  title: 'Your Professional Title', // e.g., "Senior Software Engineer"
-  location: 'Your City, Country',
-  bio: `Write your professional bio here. Talk about your experience, 
-  what you're passionate about, and what makes you unique. 
-  Make it engaging and authentic.`,
+  title: 'Senior Software Engineer',
+  location: 'Munich, Germany',
+  bio: `Highly experienced and dynamic software engineer with a rich professional background spanning over 11 years. Throughout my career, I've held positions in renowned tech companies across Albania, France, USA, and Germany. My contributions have been pivotal in designing and constructing microservices for distributed systems, implementing data pipelines on Google Cloud, and engaging in full-stack development.`,
   avatar: '/images/avatar.png', // Add your avatar image to public/images/
   email: 'your.email@example.com',
 };
@@ -33,65 +31,95 @@ export const socialLinks: SocialLink[] = [
     name: 'Twitter',
     url: 'https://twitter.com/yourusername',
   },
-  // Add more social links as needed
 ];
 
 export const experiences: Experience[] = [
   {
-    title: 'Your Job Title',
-    company: 'Company Name',
-    location: 'City, Country',
-    startDate: 'Jan 2020',
-    endDate: 'Present',
-    description: `Describe your role, responsibilities, and achievements. 
-    What technologies did you work with? What impact did you make?`,
+    title: 'Senior Software Engineer',
+    company: 'Unicepta',
+    location: 'Cologne, Germany',
+    startDate: 'Jul 2020',
+    endDate: 'Nov 2025',
+    description: `Part of Core team working on AI-powered Media & Data Intelligence Solutions. Designed and built microservices for distributed systems, engineered data pipelines on Google Cloud, and wrote full-stack code for front/back/cloud.`,
     type: 'hybrid',
   },
   {
-    title: 'Previous Job Title',
-    company: 'Previous Company',
-    location: 'City, Country',
-    startDate: 'Jan 2018',
-    endDate: 'Dec 2019',
-    description: `Another role description. Highlight key projects and accomplishments.`,
+    title: 'Senior Software Engineer',
+    company: 'Ritech Solutions',
+    location: 'Tirana, Albania',
+    startDate: 'Jul 2018',
+    endDate: 'Jul 2020',
+    description: `Part of Core team leading tech decisions. Led AppriseMobile CRM for Toyota and Microsoft IOT marketing project deployed across USA, Canada, and Australia.`,
     type: 'onsite',
   },
-  // Add more experiences
+  {
+    title: 'Software Engineer',
+    company: 'Gutenberg Technology',
+    location: 'Paris, France',
+    startDate: 'Feb 2017',
+    endDate: 'Aug 2018',
+    description: `Fullstack developer building real-time publisher platform used by National Geographic, IUBH, and Fujitsu. Developed highly available MEFIO platform and integrated SaaS strategy.`,
+    type: 'onsite',
+  },
+  {
+    title: 'Software Engineer',
+    company: 'Group of Companies',
+    location: 'Tirana, Albania',
+    startDate: 'Mar 2015',
+    endDate: 'Feb 2017',
+    description: `Developed bar/restaurant management app, optimized bank system aggregation from 11h to 1h, and built water supply billing process for Albania government project.`,
+    type: 'onsite',
+  },
 ];
 
 export const skills: SkillCategory[] = [
   {
     category: 'Frontend',
-    skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Vue.js'],
-  },
-  {
-    category: 'Backend',
-    skills: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB', 'Express'],
-  },
-  {
-    category: 'Cloud & DevOps',
-    skills: ['AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Terraform'],
+    skills: ['React.js', 'Redux', 'MobX', 'Angular', 'Bootstrap', 'Material-UI', 'React Native', 'Ionic'],
   },
   {
     category: 'Languages',
-    skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'Go'],
+    skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'Kotlin', 'SQL', 'HTML', 'CSS'],
   },
-  // Add more skill categories
+  {
+    category: 'Backend',
+    skills: ['Node.js', 'Express.js', 'Hapi', 'Firebase', 'Cloud Functions', 'AWS Lambda', 'AWS S3', 'NGINX'],
+  },
+  {
+    category: 'Cloud & DevOps',
+    skills: ['Google Cloud', 'AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'Cloud Run'],
+  },
+  {
+    category: 'Databases',
+    skills: ['MongoDB', 'Firestore', 'RethinkDB', 'Redis', 'PostgreSQL', 'SQL Server', 'BigQuery'],
+  },
+  {
+    category: 'Tools & More',
+    skills: ['Git', 'Elasticsearch', 'GraphQL', 'pandas', 'Jest', 'Cypress', 'Jira', 'VSCode'],
+  },
+  {
+    category: 'Architecture',
+    skills: ['Microservices', 'SaaS', 'Pub/Sub', 'Routing Slip', 'Dead Letter Queues'],
+  },
+  {
+    category: 'Methodologies',
+    skills: ['Agile', 'Scrum', 'CI/CD', 'TDD'],
+  },
 ];
 
 export const education: Education[] = [
   {
     degree: 'Bachelor\'s Degree in Computer Science',
-    institution: 'University Name',
-    startYear: '2015',
-    endYear: '2019',
-    location: 'City, Country',
+    institution: 'University of Tirana',
+    startYear: '2013',
+    endYear: '2016',
+    location: 'Tirana, Albania',
   },
-  // Add more education entries
 ];
 
 export const languages: Language[] = [
-  { name: 'English', proficiency: 'native' },
-  { name: 'Spanish', proficiency: 'fluent' },
-  // Add more languages
+  { name: 'Albanian', proficiency: 'native' },
+  { name: 'English', proficiency: 'fluent' },
+  { name: 'German', proficiency: 'intermediate' },
+  { name: 'Italian', proficiency: 'intermediate' },
 ];

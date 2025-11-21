@@ -1,73 +1,72 @@
 // Education Section - Academic background and languages
 
+'use client';
+
+import { motion } from 'framer-motion';
+import { GraduationCap, MapPin, Languages } from 'lucide-react';
 import { education, languages } from '@/data/portfolio';
 
 export default function Education() {
   return (
-    <section id="education" className="py-20 px-6">
+    <section id="education" className="py-20 px-6 bg-black">
       <div className="container mx-auto max-w-6xl">
         <div className="grid md:grid-cols-2 gap-12">
           {/* Education */}
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Education</h2>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 flex items-center gap-3">
+              <GraduationCap className="text-blue-400" size={32} />
+              EDUCATION
+            </h2>
             <div className="space-y-6">
-              {/* TODO: Map through education array */}
               {education.map((edu, index) => (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg"
+                  className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg hover:border-gray-700 transition-all duration-300"
                 >
                   <h3 className="text-xl font-bold mb-2">{edu.degree}</h3>
-                  <p className="text-lg text-blue-600 dark:text-blue-400 mb-2">
+                  <p className="text-lg text-blue-400 mb-2">
                     {edu.institution}
                   </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-gray-400">
                     {edu.startYear} - {edu.endYear}
                   </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                    📍 {edu.location}
+                  <p className="text-sm text-gray-400 mt-1 flex items-center gap-1">
+                    <MapPin size={14} /> {edu.location}
                   </p>
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Languages */}
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Languages</h2>
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-              <div className="space-y-4">
-                {/* TODO: Map through languages array */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 flex items-center gap-3">
+              <Languages className="text-blue-400" size={32} />
+              LANGUAGES
+            </h2>
+            <div className="bg-gray-900/50 border border-gray-800 p-6 rounded-lg hover:border-gray-700 transition-all duration-300">
+              <div className="flex flex-wrap gap-3">
                 {languages.map((lang, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <span className="text-lg font-medium">{lang.name}</span>
-                    {lang.proficiency && (
-                      <span className="text-sm px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
-                        {lang.proficiency}
-                      </span>
-                    )}
-                  </div>
+                  <span
+                    key={index}
+                    className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-full text-gray-300 hover:border-blue-500 hover:text-blue-400 transition-all duration-300"
+                  >
+                    {lang.name}
+                  </span>
                 ))}
               </div>
             </div>
-
-            {/* Certifications (Optional) */}
-            <div className="mt-8">
-              <h3 className="text-2xl font-bold mb-4">Certifications</h3>
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                {/* TODO: Add your certifications here */}
-                <p className="text-gray-600 dark:text-gray-400">
-                  Add your professional certifications, courses, or awards here.
-                </p>
-                {/* Example:
-                <ul className="space-y-2">
-                  <li>• AWS Certified Solutions Architect</li>
-                  <li>• Google Cloud Professional Developer</li>
-                </ul>
-                */}
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
