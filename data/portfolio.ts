@@ -13,7 +13,7 @@ export const personalInfo: PersonalInfo = {
   name: 'Saketh Pai',
   title: 'Cybersecurity Enthusiast',
   location: 'Bangalore, India',
-  bio: `Passionate cybersecurity enthusiast and full-stack developer with over 11 years of experience building secure, scalable web applications. I specialize in identifying vulnerabilities, implementing robust security measures, and leveraging AI/ML to enhance threat detection and system intelligence. My journey spans across cybersecurity research, modern web development with cutting-edge frameworks, and integrating AI-powered solutions to solve complex real-world problems.`,
+  bio: `Passionate cybersecurity enthusiast and full-stack developer. I specialize in identifying vulnerabilities, implementing robust security measures, and leveraging AI/ML to enhance threat detection and system intelligence. My journey spans across cybersecurity research, modern web development with cutting-edge frameworks, and integrating AI-powered solutions to solve complex real-world problems.`,
   avatar: '/images/avatar.png', // Add your avatar image to public/images/
   email: 'hello@sakethpai.me',
 };
