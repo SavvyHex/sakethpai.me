@@ -179,11 +179,6 @@ function CarOnTrack({ trackIndex }: { trackIndex: number }) {
 }
 
 export default function Home() {
-  const [currentLap, setCurrentLap] = useState(0);
-  const [trackIndex, setTrackIndex] = useState(0);
-  const totalLaps = 6;
-  const totalTrackPoints = TRACK_PATH.length;
-
   // Sections data
   const sections = [
     { id: 0, title: 'START', subtitle: 'Welcome', icon: Flag },
@@ -194,7 +189,12 @@ export default function Home() {
     { id: 5, title: 'CONTACT', subtitle: 'Get in Touch', icon: Mail },
   ];
 
-  // Scroll-controlled laps - incrementally move car along track
+  const [currentLap, setCurrentLap] = useState(0);
+  const [trackIndex, setTrackIndex] = useState(0);
+  const totalLaps = sections.length; // Now dynamic
+  const totalTrackPoints = TRACK_PATH.length;
+
+  // Scroll-controlled laps - incrementally move car along track with infinite looping
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
@@ -203,17 +203,23 @@ export default function Home() {
         // Adjust scroll sensitivity (higher = less sensitive)
         const sensitivity = 30;
         const increment = e.deltaY / sensitivity;
-        const newIndex = prev + increment;
+        let newIndex = prev + increment;
         
-        // Clamp between 0 and total laps worth of track points
+        // Allow infinite looping - wrap around when reaching boundaries
         const maxIndex = totalLaps * totalTrackPoints;
-        const clampedIndex = Math.max(0, Math.min(maxIndex, newIndex));
+        
+        if (newIndex < 0) {
+          // Scrolling up from start - loop to end
+          newIndex = maxIndex + (newIndex % maxIndex);
+        } else if (newIndex >= maxIndex) {
+          // Scrolling down from end - loop back to start (lap 0)
+          newIndex = newIndex % maxIndex;
+        }
         
         // Calculate current lap based on track position
-        const lap = Math.floor(clampedIndex / totalTrackPoints);
-        setCurrentLap(Math.min(lap, totalLaps - 1));
-        
-        return clampedIndex;
+        const lap = Math.floor(newIndex / totalTrackPoints);
+        setCurrentLap(lap);
+        return newIndex;
       });
     };
 
