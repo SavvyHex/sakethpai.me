@@ -56,23 +56,23 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="text-center space-y-6"
+            className="text-center space-y-4 w-full"
           >
-            <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center border-4 border-yellow-400 shadow-2xl shadow-red-600/50">
-              <Flag size={48} className="text-yellow-400" fill="currentColor" />
+            <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center border-4 border-yellow-400 shadow-2xl shadow-red-600/50">
+              <Flag size={40} className="text-yellow-400" fill="currentColor" />
             </div>
-            <h1 className="text-6xl md:text-8xl font-black" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h1 className="text-4xl md:text-6xl font-black" style={{ fontFamily: 'Orbitron, sans-serif' }}>
               <span className="text-white">{personalInfo.name.split(' ')[0]}</span>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-yellow-400 to-red-600">
                 {personalInfo.name.split(' ')[1] || 'RACER'}
               </span>
             </h1>
-            <div className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 border-2 border-yellow-400 rounded-lg inline-block">
+            <div className="px-5 py-2 bg-gradient-to-r from-red-600 to-red-800 border-2 border-yellow-400 rounded-lg inline-block">
               <div className="text-xs text-yellow-400 font-bold" style={{ fontFamily: 'Orbitron, sans-serif' }}>DRIVER</div>
-              <div className="text-xl font-bold text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>{personalInfo.title}</div>
+              <div className="text-lg font-bold text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>{personalInfo.title}</div>
             </div>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">{personalInfo.location}</p>
+            <p className="text-base text-gray-300 mx-auto">{personalInfo.location}</p>
           </motion.div>
         );
 
@@ -83,28 +83,28 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="space-y-6 max-w-3xl mx-auto"
+            className="space-y-4 w-full"
           >
-            <h2 className="text-5xl font-black text-center mb-8" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h2 className="text-4xl font-black text-center mb-4" style={{ fontFamily: 'Orbitron, sans-serif' }}>
               ABOUT ME
             </h2>
-            <p className="text-lg text-gray-300 leading-relaxed text-center">
+            <p className="text-base text-gray-300 leading-relaxed text-center">
               {personalInfo.bio}
             </p>
-            <div className="grid grid-cols-3 gap-4 mt-8">
-              <div className="bg-black/60 border border-red-600/30 rounded-lg p-4 backdrop-blur text-center">
-                <Trophy size={32} className="text-yellow-400 mx-auto mb-2" />
-                <div className="text-3xl font-black text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>11+</div>
+            <div className="grid grid-cols-3 gap-3 mt-6">
+              <div className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur text-center">
+                <Trophy size={28} className="text-yellow-400 mx-auto mb-2" />
+                <div className="text-2xl font-black text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>11+</div>
                 <div className="text-xs text-gray-400 uppercase">Years</div>
               </div>
-              <div className="bg-black/60 border border-red-600/30 rounded-lg p-4 backdrop-blur text-center">
-                <Zap size={32} className="text-red-600 mx-auto mb-2" />
-                <div className="text-3xl font-black text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>50+</div>
+              <div className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur text-center">
+                <Zap size={28} className="text-red-600 mx-auto mb-2" />
+                <div className="text-2xl font-black text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>50+</div>
                 <div className="text-xs text-gray-400 uppercase">Projects</div>
               </div>
-              <div className="bg-black/60 border border-red-600/30 rounded-lg p-4 backdrop-blur text-center">
-                <Flag size={32} className="text-green-500 mx-auto mb-2" />
-                <div className="text-3xl font-black text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>4</div>
+              <div className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur text-center">
+                <Flag size={28} className="text-green-500 mx-auto mb-2" />
+                <div className="text-2xl font-black text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>4</div>
                 <div className="text-xs text-gray-400 uppercase">Countries</div>
               </div>
             </div>
@@ -118,22 +118,22 @@ export default function Home() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="space-y-4 max-w-3xl mx-auto"
+            className="space-y-3 w-full"
           >
-            <h2 className="text-5xl font-black text-center mb-8" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h2 className="text-4xl font-black text-center mb-4" style={{ fontFamily: 'Orbitron, sans-serif' }}>
               EXPERIENCE
             </h2>
-            <div className="space-y-4 max-h-[400px] overflow-y-auto pr-4">
+            <div className="space-y-3 max-h-[350px] overflow-y-auto pr-2">
               {experiences.slice(0, 3).map((exp, idx) => (
-                <div key={idx} className="bg-black/60 border border-red-600/30 rounded-lg p-4 backdrop-blur">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-xl font-bold text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+                <div key={idx} className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur">
+                  <div className="flex items-start justify-between mb-1">
+                    <h3 className="text-lg font-bold text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>
                       {exp.title}
                     </h3>
                     <span className="text-xs text-red-600 font-bold">{exp.startDate}</span>
                   </div>
-                  <p className="text-red-400 font-semibold mb-2">{exp.company}</p>
-                  <p className="text-sm text-gray-400">{exp.description}</p>
+                  <p className="text-red-400 font-semibold mb-1 text-sm">{exp.company}</p>
+                  <p className="text-xs text-gray-400">{exp.description}</p>
                 </div>
               ))}
             </div>
@@ -147,22 +147,22 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="space-y-6 max-w-4xl mx-auto"
+            className="space-y-4 w-full"
           >
-            <h2 className="text-5xl font-black text-center mb-8" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h2 className="text-4xl font-black text-center mb-4" style={{ fontFamily: 'Orbitron, sans-serif' }}>
               SKILLS
             </h2>
-            <div className="grid grid-cols-2 gap-4 max-h-[400px] overflow-y-auto pr-4">
+            <div className="grid grid-cols-2 gap-3 max-h-[350px] overflow-y-auto pr-2">
               {skills.slice(0, 4).map((category, idx) => (
-                <div key={idx} className="bg-black/60 border border-red-600/30 rounded-lg p-4 backdrop-blur">
-                  <h3 className="text-sm font-bold text-red-400 uppercase mb-3" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+                <div key={idx} className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur">
+                  <h3 className="text-xs font-bold text-red-400 uppercase mb-2" style={{ fontFamily: 'Orbitron, sans-serif' }}>
                     {category.category}
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {category.skills.slice(0, 6).map((skill, skillIdx) => (
                       <span
                         key={skillIdx}
-                        className="px-2 py-1 bg-black/40 border border-red-600/30 rounded text-xs text-gray-300"
+                        className="px-2 py-0.5 bg-black/40 border border-red-600/30 rounded text-xs text-gray-300"
                         style={{ fontFamily: 'Rajdhani, sans-serif' }}
                       >
                         {skill}
@@ -182,24 +182,24 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="space-y-6 max-w-3xl mx-auto"
+            className="space-y-3 w-full"
           >
-            <h2 className="text-5xl font-black text-center mb-8" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h2 className="text-4xl font-black text-center mb-4" style={{ fontFamily: 'Orbitron, sans-serif' }}>
               EDUCATION
             </h2>
-            <div className="grid gap-6">
+            <div className="grid gap-3 max-h-[350px] overflow-y-auto pr-2">
               {education.map((edu, idx) => (
-                <div key={idx} className="bg-black/60 border border-red-600/30 rounded-lg p-6 backdrop-blur">
-                  <h3 className="text-xl font-bold text-white mb-2">{edu.degree}</h3>
-                  <p className="text-red-400 font-semibold mb-2">{edu.institution}</p>
-                  <p className="text-sm text-gray-400">{edu.startYear} - {edu.endYear} • {edu.location}</p>
+                <div key={idx} className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur">
+                  <h3 className="text-lg font-bold text-white mb-1">{edu.degree}</h3>
+                  <p className="text-red-400 font-semibold mb-1 text-sm">{edu.institution}</p>
+                  <p className="text-xs text-gray-400">{edu.startYear} - {edu.endYear} • {edu.location}</p>
                 </div>
               ))}
-              <div className="bg-black/60 border border-red-600/30 rounded-lg p-6 backdrop-blur">
-                <h3 className="text-xl font-bold text-white mb-4">Languages</h3>
+              <div className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur">
+                <h3 className="text-lg font-bold text-white mb-2">Languages</h3>
                 <div className="flex flex-wrap gap-2">
                   {languages.map((lang, idx) => (
-                    <span key={idx} className="px-4 py-2 bg-black/40 border border-red-600/30 rounded-full text-sm text-gray-300">
+                    <span key={idx} className="px-3 py-1 bg-black/40 border border-red-600/30 rounded-full text-xs text-gray-300">
                       {lang.name}
                     </span>
                   ))}
@@ -216,16 +216,16 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="text-center space-y-8 max-w-2xl mx-auto"
+            className="text-center space-y-4 w-full"
           >
-            <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center border-4 border-yellow-400 shadow-2xl shadow-green-600/50">
-              <Flag size={48} className="text-yellow-400" fill="currentColor" />
+            <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center border-4 border-yellow-400 shadow-2xl shadow-green-600/50">
+              <Flag size={40} className="text-yellow-400" fill="currentColor" />
             </div>
-            <h2 className="text-5xl font-black" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h2 className="text-4xl font-black" style={{ fontFamily: 'Orbitron, sans-serif' }}>
               GET IN TOUCH
             </h2>
-            <p className="text-lg text-gray-400">Let's build something amazing together</p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <p className="text-sm text-gray-400">Let's build something amazing together</p>
+            <div className="flex flex-wrap gap-2 justify-center">
               {socialLinks.map((link) => {
                 const Icon = iconMap[link.name] || Mail;
                 return (
@@ -234,10 +234,10 @@ export default function Home() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-6 py-3 bg-black/60 border-2 border-red-600/30 rounded-lg hover:border-red-600 hover:bg-red-600/20 transition-all duration-300 group backdrop-blur"
+                    className="flex items-center gap-2 px-4 py-2 bg-black/60 border-2 border-red-600/30 rounded-lg hover:border-red-600 hover:bg-red-600/20 transition-all duration-300 group backdrop-blur"
                   >
-                    <Icon size={24} className="text-gray-400 group-hover:text-red-600 transition-colors" />
-                    <span className="text-gray-300 group-hover:text-white font-medium">{link.name}</span>
+                    <Icon size={20} className="text-gray-400 group-hover:text-red-600 transition-colors" />
+                    <span className="text-sm text-gray-300 group-hover:text-white font-medium">{link.name}</span>
                   </a>
                 );
               })}
@@ -245,7 +245,7 @@ export default function Home() {
             {personalInfo.email && (
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="inline-block px-8 py-4 bg-gradient-to-r from-red-600 to-red-800 border-2 border-yellow-400 rounded-lg font-black text-lg text-white shadow-lg shadow-red-600/50 hover:shadow-red-600/80 transition-all duration-300"
+                className="inline-block px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 border-2 border-yellow-400 rounded-lg font-black text-base text-white shadow-lg shadow-red-600/50 hover:shadow-red-600/80 transition-all duration-300"
                 style={{ fontFamily: 'Orbitron, sans-serif' }}
               >
                 SEND EMAIL
@@ -264,53 +264,78 @@ export default function Home() {
       {/* Racing Grid Background */}
       <div className="absolute inset-0 racing-grid opacity-10 pointer-events-none" />
 
-      {/* Race Track SVG - Fixed */}
+      {/* Race Track SVG - NASCAR Oval Style */}
       <svg
         viewBox="0 0 1000 1000"
-        className="absolute inset-0 w-full h-full opacity-30"
+        className="absolute inset-0 w-full h-full"
       >
+        {/* Track outer border - NASCAR oval shape */}
+        <path
+          d="M 250,300 L 750,300 Q 850,300 850,400 L 850,600 Q 850,700 750,700 L 250,700 Q 150,700 150,600 L 150,400 Q 150,300 250,300 Z"
+          fill="none"
+          stroke="#666"
+          strokeWidth="4"
+          opacity="0.8"
+        />
         {/* Track surface */}
         <path
-          d="M 250,500 Q 250,250 500,250 Q 750,250 750,500 Q 750,750 500,750 Q 250,750 250,500 Z"
+          d="M 250,300 L 750,300 Q 850,300 850,400 L 850,600 Q 850,700 750,700 L 250,700 Q 150,700 150,600 L 150,400 Q 150,300 250,300 Z"
           fill="none"
-          stroke="#444"
-          strokeWidth="100"
+          stroke="#333"
+          strokeWidth="140"
+          opacity="0.6"
+        />
+        {/* Track inner border */}
+        <path
+          d="M 250,300 L 750,300 Q 850,300 850,400 L 850,600 Q 850,700 750,700 L 250,700 Q 150,700 150,600 L 150,400 Q 150,300 250,300 Z"
+          fill="none"
+          stroke="#555"
+          strokeWidth="2"
+          opacity="0.9"
         />
         {/* Center line dashes */}
         <path
-          d="M 250,500 Q 250,250 500,250 Q 750,250 750,500 Q 750,750 500,750 Q 250,750 250,500 Z"
+          d="M 250,300 L 750,300 Q 850,300 850,400 L 850,600 Q 850,700 750,700 L 250,700 Q 150,700 150,600 L 150,400 Q 150,300 250,300 Z"
           fill="none"
           stroke="#ffff00"
-          strokeWidth="2"
-          strokeDasharray="20,20"
-          opacity="0.6"
+          strokeWidth="3"
+          strokeDasharray="30,20"
+          opacity="0.7"
         />
         
-        {/* Animated racing car */}
-        <g
-          style={{
-            transform: `rotate(${lapProgress * 3.6}deg)`,
-            transformOrigin: '500px 500px',
-          }}
-        >
-          <g transform="translate(500, 250)">
-            {/* Car body */}
-            <rect x="-15" y="-8" width="30" height="16" rx="2" fill="#ff0000" stroke="#000" strokeWidth="1" />
-            <rect x="0" y="-5" width="12" height="10" rx="1" fill="#1a1a1a" />
-            <rect x="12" y="-6" width="4" height="12" fill="#ff0000" opacity="0.8" />
-            <rect x="-16" y="-7" width="2" height="14" fill="#ff0000" opacity="0.8" />
-            <circle cx="8" cy="-7" r="2" fill="#1a1a1a" />
-            <circle cx="8" cy="7" r="2" fill="#1a1a1a" />
-            <circle cx="-8" cy="-7" r="2" fill="#1a1a1a" />
-            <circle cx="-8" cy="7" r="2" fill="#1a1a1a" />
-            <text x="6" y="2" fontSize="8" fill="#ffffff" fontWeight="bold" textAnchor="middle">1</text>
+        {/* Start/Finish line */}
+        <rect x="240" y="230" width="20" height="140" fill="white" opacity="0.2" />
+        <rect x="260" y="230" width="20" height="140" fill="black" opacity="0.2" />
+        <rect x="280" y="230" width="20" height="140" fill="white" opacity="0.2" />
+        
+        {/* Animated racing car - follows NASCAR oval path */}
+        <g>
+          <animateMotion
+            dur="8s"
+            repeatCount="indefinite"
+            rotate="auto"
+            path="M 250,300 L 750,300 Q 850,300 850,400 L 850,600 Q 850,700 750,700 L 250,700 Q 150,700 150,600 L 150,400 Q 150,300 250,300 Z"
+          >
+            <mpath href="#trackPath" />
+          </animateMotion>
+          <g transform="translate(0, 0)">
+            {/* NASCAR-style car body */}
+            <rect x="-20" y="-10" width="40" height="20" rx="3" fill="#ff0000" stroke="#000" strokeWidth="1.5" />
+            <rect x="0" y="-7" width="16" height="14" rx="2" fill="#1a1a1a" />
+            <rect x="16" y="-8" width="6" height="16" fill="#ff0000" opacity="0.8" />
+            <rect x="-22" y="-9" width="3" height="18" fill="#ff0000" opacity="0.8" />
+            <circle cx="10" cy="-9" r="3" fill="#1a1a1a" />
+            <circle cx="10" cy="9" r="3" fill="#1a1a1a" />
+            <circle cx="-10" cy="-9" r="3" fill="#1a1a1a" />
+            <circle cx="-10" cy="9" r="3" fill="#1a1a1a" />
+            <text x="8" y="3" fontSize="10" fill="#ffffff" fontWeight="bold" textAnchor="middle">1</text>
           </g>
         </g>
       </svg>
 
-      {/* Content in center of track */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 p-8">
-        <div className="w-full max-w-4xl h-[500px] flex items-center justify-center">
+      {/* Content in center of track - constrained to track interior */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="w-full max-w-2xl px-20 py-16 flex items-center justify-center">
           <AnimatePresence mode="wait">
             {renderContent()}
           </AnimatePresence>
