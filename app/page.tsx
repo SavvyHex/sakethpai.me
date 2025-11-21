@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { personalInfo, experiences, skills, education, languages, socialLinks } from '@/data/portfolio';
 import { Github, Linkedin, Twitter, Mail, Flag, Zap, Trophy, ChevronRight, GraduationCap, Briefcase, Code } from 'lucide-react';
@@ -12,96 +12,152 @@ const iconMap: { [key: string]: any } = {
   Email: Mail,
 };
 
-// Component to position car on track based on progress
-function CarOnTrack({ progress }: { progress: number }) {
-  // Calculate position along the track path based on progress (0-100)
-  // Following center line of track - matches yellow dashed line
-  const getCarPosition = (progress: number) => {
-    // Center line coordinates following the track path exactly
-    const trackPath = [
-      // Top straight (y=150)
-      { x: 250, y: 150, angle: 0 },
-      { x: 600, y: 150, angle: 0 },
-      { x: 950, y: 150, angle: 0 },
-      { x: 1250, y: 150, angle: 0 },
-      
-      // Right turn top
-      { x: 1350, y: 150, angle: 10 },
-      { x: 1430, y: 180, angle: 35 },
-      { x: 1480, y: 240, angle: 60 },
-      { x: 1520, y: 320, angle: 85 },
-      
-      // Right straight (x=1520)
-      { x: 1520, y: 450, angle: 90 },
-      { x: 1520, y: 550, angle: 90 },
-      { x: 1520, y: 650, angle: 90 },
-      { x: 1520, y: 780, angle: 90 },
-      
-      // Bottom right turn
-      { x: 1520, y: 860, angle: 95 },
-      { x: 1480, y: 910, angle: 125 },
-      { x: 1400, y: 940, angle: 155 },
-      { x: 1350, y: 950, angle: 170 },
-      
-      // Bottom straight (y=950)
-      { x: 1100, y: 950, angle: 180 },
-      { x: 800, y: 950, angle: 180 },
-      { x: 500, y: 950, angle: 180 },
-      { x: 250, y: 950, angle: 180 },
-      
-      // Bottom left turn
-      { x: 150, y: 950, angle: 190 },
-      { x: 100, y: 910, angle: 215 },
-      { x: 80, y: 850, angle: 245 },
-      { x: 80, y: 780, angle: 270 },
-      
-      // Left straight (x=80)
-      { x: 80, y: 650, angle: 270 },
-      { x: 80, y: 550, angle: 270 },
-      { x: 80, y: 450, angle: 270 },
-      { x: 80, y: 320, angle: 270 },
-      
-      // Top left turn
-      { x: 80, y: 240, angle: 285 },
-      { x: 100, y: 190, angle: 305 },
-      { x: 140, y: 160, angle: 330 },
-      { x: 200, y: 150, angle: 355 },
-    ];
+// Component to position car on track based on track index
+function CarOnTrack({ trackIndex }: { trackIndex: number }) {
+  const prevAngleRef = useRef(0);
 
-    const totalPoints = trackPath.length;
-    const progressIndex = (progress / 100) * totalPoints;
-    const index = Math.floor(progressIndex);
-    const fraction = progressIndex - index;
-
-    const currentPoint = trackPath[index % totalPoints];
-    const nextPoint = trackPath[(index + 1) % totalPoints];
-
-    // Smooth interpolation between points
-    const x = currentPoint.x + (nextPoint.x - currentPoint.x) * fraction;
-    const y = currentPoint.y + (nextPoint.y - currentPoint.y) * fraction;
+  // Center line coordinates following the track path exactly
+  const trackPath = [
+    // Top straight (y=150)
+    { x: 250, y: 150 },
+    { x: 300, y: 150 },
+    { x: 350, y: 150 },
+    { x: 400, y: 150 },
+    { x: 450, y: 150 },
+    { x: 500, y: 150 },
+    { x: 550, y: 150 },
+    { x: 600, y: 150 },
+    { x: 650, y: 150 },
+    { x: 700, y: 150 },
+    { x: 750, y: 150 },
+    { x: 800, y: 150 },
+    { x: 850, y: 150 },
+    { x: 900, y: 150 },
+    { x: 950, y: 150 },
+    { x: 1000, y: 150 },
+    { x: 1050, y: 150 },
+    { x: 1100, y: 150 },
+    { x: 1150, y: 150 },
+    { x: 1200, y: 150 },
+    { x: 1250, y: 150 },
+    { x: 1300, y: 150 },
     
-    // Handle angle interpolation to prevent spinning at lap completion
-    let angleDiff = nextPoint.angle - currentPoint.angle;
+    // Right turn top
+    { x: 1350, y: 150 },
+    { x: 1390, y: 165 },
+    { x: 1430, y: 190 },
+    { x: 1460, y: 220 },
+    { x: 1485, y: 255 },
+    { x: 1505, y: 290 },
+    { x: 1520, y: 330 },
     
-    // If we're wrapping from end to start (355° to 0°), adjust the angle difference
-    if (angleDiff > 180) {
-      angleDiff -= 360;
-    } else if (angleDiff < -180) {
-      angleDiff += 360;
-    }
+    // Right straight (x=1520)
+    { x: 1520, y: 380 },
+    { x: 1520, y: 430 },
+    { x: 1520, y: 480 },
+    { x: 1520, y: 530 },
+    { x: 1520, y: 580 },
+    { x: 1520, y: 630 },
+    { x: 1520, y: 680 },
+    { x: 1520, y: 730 },
+    { x: 1520, y: 780 },
+    { x: 1520, y: 830 },
     
-    const angle = currentPoint.angle + angleDiff * fraction;
+    // Bottom right turn
+    { x: 1520, y: 870 },
+    { x: 1505, y: 905 },
+    { x: 1480, y: 930 },
+    { x: 1450, y: 945 },
+    { x: 1410, y: 952 },
+    { x: 1370, y: 955 },
+    
+    // Bottom straight (y=950)
+    { x: 1320, y: 950 },
+    { x: 1270, y: 950 },
+    { x: 1220, y: 950 },
+    { x: 1170, y: 950 },
+    { x: 1120, y: 950 },
+    { x: 1070, y: 950 },
+    { x: 1020, y: 950 },
+    { x: 970, y: 950 },
+    { x: 920, y: 950 },
+    { x: 870, y: 950 },
+    { x: 820, y: 950 },
+    { x: 770, y: 950 },
+    { x: 720, y: 950 },
+    { x: 670, y: 950 },
+    { x: 620, y: 950 },
+    { x: 570, y: 950 },
+    { x: 520, y: 950 },
+    { x: 470, y: 950 },
+    { x: 420, y: 950 },
+    { x: 370, y: 950 },
+    { x: 320, y: 950 },
+    { x: 270, y: 950 },
+    { x: 220, y: 950 },
+    { x: 180, y: 950 },
+    
+    // Bottom left turn
+    { x: 140, y: 945 },
+    { x: 110, y: 930 },
+    { x: 90, y: 905 },
+    { x: 80, y: 870 },
+    { x: 80, y: 830 },
+    
+    // Left straight (x=80)
+    { x: 80, y: 780 },
+    { x: 80, y: 730 },
+    { x: 80, y: 680 },
+    { x: 80, y: 630 },
+    { x: 80, y: 580 },
+    { x: 80, y: 530 },
+    { x: 80, y: 480 },
+    { x: 80, y: 430 },
+    { x: 80, y: 380 },
+    { x: 80, y: 330 },
+    
+    // Top left turn
+    { x: 80, y: 290 },
+    { x: 90, y: 255 },
+    { x: 105, y: 220 },
+    { x: 130, y: 190 },
+    { x: 160, y: 170 },
+    { x: 190, y: 158 },
+    { x: 220, y: 152 },
+  ];
 
-    return { x, y, angle };
-  };
+  const totalPoints = trackPath.length;
+  const index = Math.floor(trackIndex) % totalPoints;
+  const nextIndex = (index + 1) % totalPoints;
+  const fraction = trackIndex - Math.floor(trackIndex);
 
-  const { x, y, angle } = getCarPosition(progress);
+  const currentPoint = trackPath[index];
+  const nextPoint = trackPath[nextIndex];
+
+  // Smooth interpolation between points
+  const x = currentPoint.x + (nextPoint.x - currentPoint.x) * fraction;
+  const y = currentPoint.y + (nextPoint.y - currentPoint.y) * fraction;
+  
+  // Calculate angle based on direction of movement
+  const dx = nextPoint.x - currentPoint.x;
+  const dy = nextPoint.y - currentPoint.y;
+  
+  // Raw direction angle
+  let angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+  // Prevent spins by choosing shortest turning direction
+  let prevAngle = prevAngleRef.current;
+  let delta = angle - prevAngle;
+  // Normalize delta to [-180, 180] range to get shortest rotation
+  delta = ((delta + 180) % 360 + 360) % 360 - 180;
+  angle = prevAngle + delta;
+  prevAngleRef.current = angle;
 
   return (
     <g 
       transform={`translate(${x}, ${y}) rotate(${angle})`}
       style={{
-        transition: 'transform 0.1s ease-out',
+        transition: 'transform 0.08s linear',
       }}
     >
       {/* NASCAR-style car body */}
@@ -120,9 +176,9 @@ function CarOnTrack({ progress }: { progress: number }) {
 
 export default function Home() {
   const [currentLap, setCurrentLap] = useState(0);
-  const [lapProgress, setLapProgress] = useState(0);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [trackIndex, setTrackIndex] = useState(0);
   const totalLaps = 6;
+  const totalTrackPoints = 107; // Total points in the track path
 
   // Sections data
   const sections = [
@@ -134,34 +190,32 @@ export default function Home() {
     { id: 5, title: 'CONTACT', subtitle: 'Get in Touch', icon: Mail },
   ];
 
-  // Scroll-controlled laps
+  // Scroll-controlled laps - incrementally move car along track
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       
-      setScrollProgress((prev) => {
+      setTrackIndex((prev) => {
         // Adjust scroll sensitivity (higher = less sensitive)
-        const sensitivity = 15;
-        const newProgress = prev + (e.deltaY / sensitivity);
+        const sensitivity = 30;
+        const increment = e.deltaY / sensitivity;
+        const newIndex = prev + increment;
         
-        // Clamp between 0 and total laps * 100
-        const maxProgress = totalLaps * 100;
-        const clampedProgress = Math.max(0, Math.min(maxProgress, newProgress));
+        // Clamp between 0 and total laps worth of track points
+        const maxIndex = totalLaps * totalTrackPoints;
+        const clampedIndex = Math.max(0, Math.min(maxIndex, newIndex));
         
-        // Calculate current lap and lap progress
-        const lap = Math.floor(clampedProgress / 100);
-        const progress = clampedProgress % 100;
-        
+        // Calculate current lap based on track position
+        const lap = Math.floor(clampedIndex / totalTrackPoints);
         setCurrentLap(Math.min(lap, totalLaps - 1));
-        setLapProgress(progress);
         
-        return clampedProgress;
+        return clampedIndex;
       });
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [totalLaps]);
+  }, [totalLaps, totalTrackPoints]);
 
   // Render content based on current lap
   const renderContent = () => {
@@ -426,7 +480,7 @@ export default function Home() {
         <rect x="270" y="70" width="20" height="160" fill="white" opacity="0.2" />
         
         {/* Scroll-controlled racing car */}
-        <CarOnTrack progress={lapProgress} />
+        <CarOnTrack trackIndex={trackIndex} />
       </svg>
 
       {/* Content in center of track - constrained to track interior */}
@@ -451,7 +505,7 @@ export default function Home() {
         <div className="mt-2 w-16 h-1 bg-gray-800 rounded-full overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-red-600 to-yellow-400 transition-all duration-100"
-            style={{ width: `${lapProgress}%` }}
+            style={{ width: `${((trackIndex % totalTrackPoints) / totalTrackPoints) * 100}%` }}
           />
         </div>
       </div>
@@ -471,7 +525,7 @@ export default function Home() {
             key={section.id}
             onClick={() => {
               setCurrentLap(section.id);
-              setLapProgress(0);
+              setTrackIndex(section.id * totalTrackPoints);
             }}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               currentLap === section.id
