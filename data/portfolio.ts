@@ -34,92 +34,76 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const experiences: Experience[] = [
-  {
-    title: 'Senior Software Engineer',
-    company: 'Unicepta',
-    location: 'Cologne, Germany',
-    startDate: 'Jul 2020',
-    endDate: 'Nov 2025',
-    description: `Part of Core team working on AI-powered Media & Data Intelligence Solutions. Designed and built microservices for distributed systems, engineered data pipelines on Google Cloud, and wrote full-stack code for front/back/cloud.`,
-    type: 'hybrid',
-  },
-  {
-    title: 'Senior Software Engineer',
-    company: 'Ritech Solutions',
-    location: 'Tirana, Albania',
-    startDate: 'Jul 2018',
-    endDate: 'Jul 2020',
-    description: `Part of Core team leading tech decisions. Led AppriseMobile CRM for Toyota and Microsoft IOT marketing project deployed across USA, Canada, and Australia.`,
-    type: 'onsite',
-  },
-  {
-    title: 'Software Engineer',
-    company: 'Gutenberg Technology',
-    location: 'Paris, France',
-    startDate: 'Feb 2017',
-    endDate: 'Aug 2018',
-    description: `Fullstack developer building real-time publisher platform used by National Geographic, IUBH, and Fujitsu. Developed highly available MEFIO platform and integrated SaaS strategy.`,
-    type: 'onsite',
-  },
-  {
-    title: 'Software Engineer',
-    company: 'Group of Companies',
-    location: 'Tirana, Albania',
-    startDate: 'Mar 2015',
-    endDate: 'Feb 2017',
-    description: `Developed bar/restaurant management app, optimized bank system aggregation from 11h to 1h, and built water supply billing process for Albania government project.`,
-    type: 'onsite',
-  },
+  // Format:
+  // {
+  //   title: 'Senior Software Engineer',
+  //   company: 'Unicepta',
+  //   location: 'Cologne, Germany',
+  //   startDate: 'Jul 2020',
+  //   endDate: 'Nov 2025',
+  //   description: `Part of Core team working on AI-powered Media & Data Intelligence Solutions. Designed and built microservices for distributed systems, engineered data pipelines on Google Cloud, and wrote full-stack code for front/back/cloud.`,
+  //   type: 'hybrid',
+  // },
 ];
 
 export const skills: SkillCategory[] = [
   {
     category: 'Frontend',
-    skills: ['React.js', 'Redux', 'MobX', 'Angular', 'Bootstrap', 'Material-UI', 'React Native', 'Ionic'],
+    skills: ['React.js', 'Next.js', 'Tailwind CSS', 'Bootstrap','React Native'],
   },
   {
     category: 'Languages',
-    skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'Kotlin', 'SQL', 'HTML', 'CSS'],
+    skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'Go', 'Rust', 'C', 'C++', 'C#', 'HTML', 'CSS'],
   },
   {
     category: 'Backend',
-    skills: ['Node.js', 'Express.js', 'Hapi', 'Firebase', 'Cloud Functions', 'AWS Lambda', 'AWS S3', 'NGINX'],
+    skills: ['Node.js', 'Express.js', 'Render', 'NGINX'],
   },
   {
     category: 'Cloud & DevOps',
-    skills: ['Google Cloud', 'AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'Cloud Run'],
+    skills: ['Google Cloud', 'AWS', 'Azure', 'Docker', 'Kubernetes'],
   },
   {
     category: 'Databases',
-    skills: ['MongoDB', 'Firestore', 'RethinkDB', 'Redis', 'PostgreSQL', 'SQL Server', 'BigQuery'],
+    skills: ['MongoDB', 'Firestore', 'Supabase', 'Redis', 'PostgreSQL', 'SQL Server'],
   },
   {
     category: 'Tools & More',
-    skills: ['Git', 'Elasticsearch', 'GraphQL', 'pandas', 'Jest', 'Cypress', 'Jira', 'VSCode'],
+    skills: ['Git', 'Elasticsearch', 'GraphQL', 'pandas', 'Jest', 'Cypress', 'Jira', 'VSCode', 'Linux'],
   },
   {
-    category: 'Architecture',
-    skills: ['Microservices', 'SaaS', 'Pub/Sub', 'Routing Slip', 'Dead Letter Queues'],
-  },
-  {
-    category: 'Methodologies',
-    skills: ['Agile', 'Scrum', 'CI/CD', 'TDD'],
-  },
+    category: 'Cybersecurity Tools',
+    skills: ['Wireshark', 'Metasploit', 'Nmap', 'Burp Suite', 'Kali Linux', 'Bettercap'],
+  }
 ];
 
 export const education: Education[] = [
   {
-    degree: 'Bachelor\'s Degree in Computer Science',
-    institution: 'University of Tirana',
-    startYear: '2013',
-    endYear: '2016',
-    location: 'Tirana, Albania',
+    degree: '10th Grade',
+    institution: 'Saint Francis de Sales Public School',
+    startYear: '2016',
+    endYear: '2022',
+    location: 'Bangalore, India',
+  },
+    {
+    degree: '12th Grade',
+    institution: 'Christ Academy Junior College',
+    startYear: '2022',
+    endYear: '2024',
+    location: 'Bangalore, India',
+  },
+    {
+    degree: 'Bachelor of Technology in Computer Science',
+    institution: 'PES University',
+    startYear: '2024',
+    endYear: '2028',
+    location: 'Bangalore, India',
   },
 ];
 
 export const languages: Language[] = [
-  { name: 'Albanian', proficiency: 'native' },
+  { name: 'Hindi', proficiency: 'intermediate' },
   { name: 'English', proficiency: 'fluent' },
-  { name: 'German', proficiency: 'intermediate' },
-  { name: 'Italian', proficiency: 'intermediate' },
+  { name: 'German', proficiency: 'basic' },
+  { name: 'Kannada', proficiency: 'intermediate' },
 ];
