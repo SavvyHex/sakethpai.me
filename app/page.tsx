@@ -289,7 +289,7 @@ export default function Home() {
             <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center border-4 border-yellow-400 shadow-2xl shadow-red-600/50">
               <Flag size={40} className="text-yellow-400" fill="currentColor" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-black" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h1 className="text-4xl md:text-6xl font-black">
               <span className="text-white">{personalInfo.name.split(' ')[0]}</span>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-yellow-400 to-red-600">
@@ -297,8 +297,8 @@ export default function Home() {
               </span>
             </h1>
             <div className="px-5 py-2 bg-gradient-to-r from-red-600 to-red-800 border-2 border-yellow-400 rounded-lg inline-block">
-              <div className="text-xs text-yellow-400 font-bold" style={{ fontFamily: 'Orbitron, sans-serif' }}>DRIVER</div>
-              <div className="text-lg font-bold text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>{personalInfo.title}</div>
+              <div className="text-xs text-yellow-400 font-bold">DRIVER</div>
+              <div className="text-lg font-bold text-white">{personalInfo.title}</div>
             </div>
             <p className="text-base text-gray-300 mx-auto">{personalInfo.location}</p>
           </motion.div>
@@ -313,7 +313,7 @@ export default function Home() {
             exit={{ opacity: 0, y: -20 }}
             className="space-y-4 w-full"
           >
-            <h2 className="text-4xl font-black text-center mb-4" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h2 className="text-4xl font-black text-center mb-4">
               ABOUT ME
             </h2>
             <p className="text-base text-gray-300 leading-relaxed text-center">
@@ -322,17 +322,17 @@ export default function Home() {
             <div className="grid grid-cols-3 gap-3 mt-6">
               <div className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur text-center">
                 <Trophy size={28} className="text-yellow-400 mx-auto mb-2" />
-                <div className="text-2xl font-black text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>11+</div>
+                <div className="text-2xl font-black text-white">11+</div>
                 <div className="text-xs text-gray-400 uppercase">Years</div>
               </div>
               <div className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur text-center">
                 <Zap size={28} className="text-red-600 mx-auto mb-2" />
-                <div className="text-2xl font-black text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>50+</div>
+                <div className="text-2xl font-black text-white">50+</div>
                 <div className="text-xs text-gray-400 uppercase">Projects</div>
               </div>
               <div className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur text-center">
                 <Flag size={28} className="text-green-500 mx-auto mb-2" />
-                <div className="text-2xl font-black text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>4</div>
+                <div className="text-2xl font-black text-white">4</div>
                 <div className="text-xs text-gray-400 uppercase">Countries</div>
               </div>
             </div>
@@ -348,14 +348,14 @@ export default function Home() {
             exit={{ opacity: 0, x: 20 }}
             className="space-y-3 w-full"
           >
-            <h2 className="text-4xl font-black text-center mb-4" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h2 className="text-4xl font-black text-center mb-4">
               EXPERIENCE
             </h2>
             <div className="space-y-3 max-h-[350px] overflow-y-auto pr-2">
               {experiences.slice(0, 3).map((exp, idx) => (
                 <div key={idx} className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur">
                   <div className="flex items-start justify-between mb-1">
-                    <h3 className="text-lg font-bold text-white" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+                    <h3 className="text-lg font-bold text-white">
                       {exp.title}
                     </h3>
                     <span className="text-xs text-red-600 font-bold">{exp.startDate}</span>
@@ -377,13 +377,13 @@ export default function Home() {
             exit={{ opacity: 0, scale: 0.9 }}
             className="space-y-4 w-full"
           >
-            <h2 className="text-4xl font-black text-center mb-4" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h2 className="text-4xl font-black text-center mb-4">
               SKILLS
             </h2>
             <div className="grid grid-cols-2 gap-3 max-h-[350px] overflow-y-auto pr-2">
               {skills.slice(0, 4).map((category, idx) => (
                 <div key={idx} className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur">
-                  <h3 className="text-xs font-bold text-red-400 uppercase mb-2" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+                  <h3 className="text-xs font-bold text-red-400 uppercase mb-2">
                     {category.category}
                   </h3>
                   <div className="flex flex-wrap gap-1.5">
@@ -391,7 +391,6 @@ export default function Home() {
                       <span
                         key={skillIdx}
                         className="px-2 py-0.5 bg-black/40 border border-red-600/30 rounded text-xs text-gray-300"
-                        style={{ fontFamily: 'Rajdhani, sans-serif' }}
                       >
                         {skill}
                       </span>
@@ -412,7 +411,7 @@ export default function Home() {
             exit={{ opacity: 0, y: -20 }}
             className="space-y-3 w-full"
           >
-            <h2 className="text-4xl font-black text-center mb-4" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h2 className="text-4xl font-black text-center mb-4">
               EDUCATION
             </h2>
             <div className="grid gap-3 max-h-[350px] overflow-y-auto pr-2">
@@ -449,7 +448,7 @@ export default function Home() {
             <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center border-4 border-yellow-400 shadow-2xl shadow-green-600/50">
               <Flag size={40} className="text-yellow-400" fill="currentColor" />
             </div>
-            <h2 className="text-4xl font-black" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+            <h2 className="text-4xl font-black">
               GET IN TOUCH
             </h2>
             <p className="text-sm text-gray-400">Let's build something amazing together</p>
@@ -473,8 +472,7 @@ export default function Home() {
             {personalInfo.email && (
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="inline-block px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 border-2 border-yellow-400 rounded-lg font-black text-base text-white shadow-lg shadow-red-600/50 hover:shadow-red-600/80 transition-all duration-300"
-                style={{ fontFamily: 'Orbitron, sans-serif' }}
+                className="inline-block px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 border-2 border-yellow-400 rounded-lg font-black text-base text-white shadow-lg shadow-red-600/50 hover:shadow-red-600/80 transition-all duration-300 uppercase"
               >
                 SEND EMAIL
               </a>
@@ -551,10 +549,10 @@ export default function Home() {
 
       {/* Lap Counter */}
       <div className="fixed bottom-8 right-8 z-50 bg-black/90 border-2 border-red-600 rounded-lg p-4 backdrop-blur-sm">
-        <div className="text-xs text-gray-400 mb-1 font-bold" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+        <div className="text-xs text-gray-400 mb-1 font-bold uppercase">
           CURRENT LAP
         </div>
-        <div className="text-3xl font-black text-red-600" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+        <div className="text-3xl font-black text-red-600">
           {currentLap}
         </div>
         <div className="text-[10px] text-gray-500 mt-1">/ {totalLaps - 1} LAPS</div>
@@ -569,7 +567,7 @@ export default function Home() {
 
       {/* Section indicator */}
       <div className="fixed bottom-8 left-8 z-50 bg-black/90 border-2 border-red-600 rounded-lg p-4 backdrop-blur-sm">
-        <div className="text-xs text-gray-400 mb-1 font-bold" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+        <div className="text-xs text-gray-400 mb-1 font-bold uppercase">
           {sections[currentLap].title}
         </div>
         <div className="text-sm text-white">{sections[currentLap].subtitle}</div>
