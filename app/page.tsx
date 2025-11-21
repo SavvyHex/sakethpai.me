@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
 import { personalInfo, experiences, skills, education, languages, socialLinks } from '@/data/portfolio';
 import { Github, Linkedin, Twitter, Mail, Flag, Zap, Trophy, ChevronRight, GraduationCap, Briefcase, Code } from 'lucide-react';
 
@@ -128,42 +128,95 @@ const TRACK_PATH = [
 
 // Component to position car on track based on track index
 function CarOnTrack({ trackIndex }: { trackIndex: number }) {
+  const carRef = useRef<SVGGElement>(null);
   const prevAngleRef = useRef(0);
-
-  const totalPoints = TRACK_PATH.length;
-  const index = Math.floor(trackIndex) % totalPoints;
-  const nextIndex = (index + 1) % totalPoints;
-  const fraction = trackIndex - Math.floor(trackIndex);
-
-  const currentPoint = TRACK_PATH[index];
-  const nextPoint = TRACK_PATH[nextIndex];
-
-  // Smooth interpolation between points
-  const x = currentPoint.x + (nextPoint.x - currentPoint.x) * fraction;
-  const y = currentPoint.y + (nextPoint.y - currentPoint.y) * fraction;
+  const prevNormalizedRef = useRef(0);
+  const [isInitialized, setIsInitialized] = useState(false);
   
-  // Calculate angle based on direction of movement
-  const dx = nextPoint.x - currentPoint.x;
-  const dy = nextPoint.y - currentPoint.y;
-  
-  // Raw direction angle
-  let angle = Math.atan2(dy, dx) * (180 / Math.PI);
+  // Use a spring to smooth out the movement along the track index
+  // This prevents the car from cutting corners when scrolling fast
+  const indexMotionValue = useMotionValue(0);
+  const smoothIndex = useSpring(indexMotionValue, { stiffness: 100, damping: 25, mass: 0.8 });
 
-  // Prevent spins by choosing shortest turning direction
-  let prevAngle = prevAngleRef.current;
-  let delta = angle - prevAngle;
-  // Normalize delta to [-180, 180] range to get shortest rotation
-  delta = ((delta + 180) % 360 + 360) % 360 - 180;
-  angle = prevAngle + delta;
-  prevAngleRef.current = angle;
+  // Initialize car position immediately on mount
+  useEffect(() => {
+    if (!isInitialized && carRef.current) {
+      // Set initial position without animation
+      const startPoint = TRACK_PATH[0];
+      const nextPoint = TRACK_PATH[1];
+      const dx = nextPoint.x - startPoint.x;
+      const dy = nextPoint.y - startPoint.y;
+      const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+      prevAngleRef.current = angle;
+      carRef.current.setAttribute("transform", `translate(${startPoint.x}, ${startPoint.y}) rotate(${angle})`);
+      setIsInitialized(true);
+    }
+  }, [isInitialized]);
+
+  useEffect(() => {
+    indexMotionValue.set(trackIndex);
+  }, [trackIndex, indexMotionValue]);
+
+  useEffect(() => {
+    const unsubscribe = smoothIndex.on("change", (latest) => {
+      if (!carRef.current) return;
+
+      const totalPoints = TRACK_PATH.length;
+      
+      // Calculate normalized index within a single lap (0 to totalPoints)
+      const rawNormalized = latest % totalPoints;
+      let normalizedIndex = rawNormalized < 0 ? rawNormalized + totalPoints : rawNormalized;
+      
+      // Detect wrap-around for smooth looping
+      const prevNormalized = prevNormalizedRef.current;
+      const diff = normalizedIndex - prevNormalized;
+      
+      // If we detect a large jump (wrap around), adjust for smooth animation
+      if (diff > totalPoints / 2) {
+        // Wrapped backwards
+        normalizedIndex -= totalPoints;
+      } else if (diff < -totalPoints / 2) {
+        // Wrapped forwards
+        normalizedIndex += totalPoints;
+      }
+      
+      prevNormalizedRef.current = normalizedIndex % totalPoints;
+      
+      const index = Math.floor(normalizedIndex);
+      const nextIndex = index + 1;
+      const fraction = normalizedIndex - index;
+
+      // Get points with proper wrapping
+      const currentPoint = TRACK_PATH[((index % totalPoints) + totalPoints) % totalPoints];
+      const nextPoint = TRACK_PATH[((nextIndex % totalPoints) + totalPoints) % totalPoints];
+
+      // Interpolate position
+      const x = currentPoint.x + (nextPoint.x - currentPoint.x) * fraction;
+      const y = currentPoint.y + (nextPoint.y - currentPoint.y) * fraction;
+      
+      // Calculate angle based on direction of movement
+      const dx = nextPoint.x - currentPoint.x;
+      const dy = nextPoint.y - currentPoint.y;
+      
+      // Raw direction angle
+      let angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+      // Prevent spins by choosing shortest turning direction
+      let prevAngle = prevAngleRef.current;
+      let delta = angle - prevAngle;
+      // Normalize delta to [-180, 180] range to get shortest rotation
+      delta = ((delta + 180) % 360 + 360) % 360 - 180;
+      angle = prevAngle + delta;
+      prevAngleRef.current = angle;
+
+      carRef.current.setAttribute("transform", `translate(${x}, ${y}) rotate(${angle})`);
+    });
+
+    return unsubscribe;
+  }, [smoothIndex]);
 
   return (
-    <g 
-      transform={`translate(${x}, ${y}) rotate(${angle})`}
-      style={{
-        transition: 'transform 0.08s linear',
-      }}
-    >
+    <g ref={carRef}>
       {/* NASCAR-style car body */}
       <rect x="-20" y="-10" width="40" height="20" rx="3" fill="#ff0000" stroke="#000" strokeWidth="1.5" />
       <rect x="0" y="-7" width="16" height="14" rx="2" fill="#1a1a1a" />
@@ -203,21 +256,15 @@ export default function Home() {
         // Adjust scroll sensitivity (higher = less sensitive)
         const sensitivity = 30;
         const increment = e.deltaY / sensitivity;
-        let newIndex = prev + increment;
-        
-        // Allow infinite looping - wrap around when reaching boundaries
-        const maxIndex = totalLaps * totalTrackPoints;
-        
-        if (newIndex < 0) {
-          // Scrolling up from start - loop to end
-          newIndex = maxIndex + (newIndex % maxIndex);
-        } else if (newIndex >= maxIndex) {
-          // Scrolling down from end - loop back to start (lap 0)
-          newIndex = newIndex % maxIndex;
-        }
+        const newIndex = prev + increment;
         
         // Calculate current lap based on track position
-        const lap = Math.floor(newIndex / totalTrackPoints);
+        const positionInCycle = newIndex % (totalLaps * totalTrackPoints);
+        const normalizedPosition = positionInCycle < 0 
+          ? positionInCycle + (totalLaps * totalTrackPoints)
+          : positionInCycle;
+        const lap = Math.floor(normalizedPosition / totalTrackPoints) % totalLaps;
+        
         setCurrentLap(lap);
         return newIndex;
       });
