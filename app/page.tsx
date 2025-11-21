@@ -247,7 +247,9 @@ export default function Home() {
   const [scrollSpeed, setScrollSpeed] = useState(0);
   const totalLaps = sections.length; // Now dynamic
   const totalTrackPoints = TRACK_PATH.length;
-  const lastScrollTimeRef = useRef(Date.now());
+  const scrollAccumulatorRef = useRef(0);
+  const lastUpdateTimeRef = useRef(Date.now());
+  const lastScrollEventRef = useRef(Date.now());
   const scrollSpeedDecayRef = useRef<NodeJS.Timeout | null>(null);
 
   // Scroll-controlled laps - incrementally move car along track with infinite looping
@@ -255,28 +257,11 @@ export default function Home() {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       
-      // Calculate scroll speed (0-300 km/h scale for speedometer)
-      const currentTime = Date.now();
-      const timeDelta = Math.max(currentTime - lastScrollTimeRef.current, 1);
-      const scrollDelta = Math.abs(e.deltaY);
+      // Accumulate scroll distance
+      scrollAccumulatorRef.current += Math.abs(e.deltaY);
       
-      // Convert to speed with logarithmic scaling for more realistic feel
-      // Higher speeds require exponentially more scroll effort
-      const rawSpeed = scrollDelta / timeDelta;
-      // Scale with diminishing returns - makes reaching 300 km/h challenging
-      const scaledSpeed = Math.min(Math.pow(rawSpeed * 15, 0.85), 300);
-      setScrollSpeed(scaledSpeed);
-      lastScrollTimeRef.current = currentTime;
-      
-      // Clear existing decay timeout
-      if (scrollSpeedDecayRef.current) {
-        clearTimeout(scrollSpeedDecayRef.current);
-      }
-      
-      // Decay speed after scrolling stops
-      scrollSpeedDecayRef.current = setTimeout(() => {
-        setScrollSpeed(0);
-      }, 150);
+      // Update last scroll event time
+      lastScrollEventRef.current = Date.now();
       
       setTrackIndex((prev) => {
         // Adjust scroll sensitivity (higher = less sensitive)
@@ -299,11 +284,42 @@ export default function Home() {
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => {
       window.removeEventListener('wheel', handleWheel);
-      if (scrollSpeedDecayRef.current) {
-        clearTimeout(scrollSpeedDecayRef.current);
-      }
     };
   }, [totalLaps, totalTrackPoints]);
+
+  // Calculate pixels per second and convert to km/h with gradual decay
+  useEffect(() => {
+    const updateSpeed = () => {
+      const currentTime = Date.now();
+      const timeDelta = (currentTime - lastUpdateTimeRef.current) / 1000; // Convert to seconds
+      const timeSinceLastScroll = currentTime - lastScrollEventRef.current;
+      
+      if (scrollAccumulatorRef.current > 0 && timeDelta > 0) {
+        // Calculate pixels per second
+        const pixelsPerSecond = scrollAccumulatorRef.current / timeDelta;
+        
+        // Convert to km/h (10000 pixels/sec = 400 km/h)
+        const kmph = Math.min((pixelsPerSecond / 20000) * 500, 500);
+        
+        setScrollSpeed(kmph);
+        
+        // Reset accumulator and time for next measurement
+        scrollAccumulatorRef.current = 0;
+        lastUpdateTimeRef.current = currentTime;
+      } else if (timeSinceLastScroll > 50) {
+        // Gradually decay speed when not scrolling
+        setScrollSpeed((prevSpeed) => {
+          if (prevSpeed === 0) return 0;
+          const decayRate = 0.15; // Decay multiplier (lower = faster decay, higher = slower)
+          const newSpeed = prevSpeed * decayRate;
+          return newSpeed < 1 ? 0 : newSpeed; // Snap to 0 when very low
+        });
+      }
+    };
+
+    const interval = setInterval(updateSpeed, 50); // Update every 50ms for smoother decay
+    return () => clearInterval(interval);
+  }, []);
 
   // Render content based on current lap
   const renderContent = () => {
@@ -621,7 +637,7 @@ export default function Home() {
               stroke="#177e89"
               strokeWidth="8"
               strokeDasharray="251.2"
-              strokeDashoffset={251.2 - (251.2 * scrollSpeed) / 300}
+              strokeDashoffset={251.2 - (251.2 * scrollSpeed) / 400}
               strokeLinecap="round"
               className="transition-all duration-150 ease-out"
             />
