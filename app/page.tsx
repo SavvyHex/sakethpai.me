@@ -218,10 +218,10 @@ function CarOnTrack({ trackIndex }: { trackIndex: number }) {
   return (
     <g ref={carRef}>
       {/* NASCAR-style car body */}
-      <rect x="-20" y="-10" width="40" height="20" rx="3" fill="#ff0000" stroke="#000" strokeWidth="1.5" />
-      <rect x="0" y="-7" width="16" height="14" rx="2" fill="#1a1a1a" />
-      <rect x="16" y="-8" width="6" height="16" fill="#ff0000" opacity="0.8" />
-      <rect x="-22" y="-9" width="3" height="18" fill="#ff0000" opacity="0.8" />
+      <rect x="-20" y="-10" width="40" height="20" rx="3" fill="#177e89" stroke="#000" strokeWidth="1.5" />
+      <rect x="0" y="-7" width="16" height="14" rx="2" fill="#084c61" />
+      <rect x="16" y="-8" width="6" height="16" fill="#177e89" opacity="0.8" />
+      <rect x="-22" y="-9" width="3" height="18" fill="#177e89" opacity="0.8" />
       <circle cx="10" cy="-9" r="3" fill="#1a1a1a" />
       <circle cx="10" cy="9" r="3" fill="#1a1a1a" />
       <circle cx="-10" cy="-9" r="3" fill="#1a1a1a" />
@@ -286,18 +286,18 @@ export default function Home() {
             exit={{ opacity: 0, scale: 0.9 }}
             className="text-center space-y-4 w-full"
           >
-            <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center border-4 border-yellow-400 shadow-2xl shadow-red-600/50">
-              <Flag size={40} className="text-yellow-400" fill="currentColor" />
+            <div className="w-20 h-20 mx-auto rounded-full bg-[#177e89] flex items-center justify-center border-4 border-[#084c61] shadow-2xl shadow-[#177e89]/50">
+              <Flag size={40} className="text-[#084c61]" fill="currentColor" />
             </div>
             <h1 className="text-4xl md:text-6xl font-black">
               <span className="text-white">{personalInfo.name.split(' ')[0]}</span>
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-yellow-400 to-red-600">
+              <span className="text-[#177e89]">
                 {personalInfo.name.split(' ')[1] || 'RACER'}
               </span>
             </h1>
-            <div className="px-5 py-2 bg-gradient-to-r from-red-600 to-red-800 border-2 border-yellow-400 rounded-lg inline-block">
-              <div className="text-xs text-yellow-400 font-bold">DRIVER</div>
+            <div className="px-5 py-2 bg-[#084c61] border-2 border-[#177e89] rounded-lg inline-block">
+              <div className="text-xs text-[#177e89] font-bold">DRIVER</div>
               <div className="text-lg font-bold text-white">{personalInfo.title}</div>
             </div>
             <p className="text-base text-gray-300 mx-auto">{personalInfo.location}</p>
@@ -320,18 +320,18 @@ export default function Home() {
               {personalInfo.bio}
             </p>
             <div className="grid grid-cols-3 gap-3 mt-6">
-              <div className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur text-center">
-                <Trophy size={28} className="text-yellow-400 mx-auto mb-2" />
+              <div className="bg-black/60 border border-[#177e89]/30 rounded-lg p-3 backdrop-blur text-center">
+                <Trophy size={28} className="text-[#177e89] mx-auto mb-2" />
                 <div className="text-2xl font-black text-white">11+</div>
                 <div className="text-xs text-gray-400 uppercase">Years</div>
               </div>
-              <div className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur text-center">
-                <Zap size={28} className="text-red-600 mx-auto mb-2" />
+              <div className="bg-black/60 border border-[#177e89]/30 rounded-lg p-3 backdrop-blur text-center">
+                <Zap size={28} className="text-[#177e89] mx-auto mb-2" />
                 <div className="text-2xl font-black text-white">50+</div>
                 <div className="text-xs text-gray-400 uppercase">Projects</div>
               </div>
-              <div className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur text-center">
-                <Flag size={28} className="text-green-500 mx-auto mb-2" />
+              <div className="bg-black/60 border border-[#177e89]/30 rounded-lg p-3 backdrop-blur text-center">
+                <Flag size={28} className="text-[#177e89] mx-auto mb-2" />
                 <div className="text-2xl font-black text-white">4</div>
                 <div className="text-xs text-gray-400 uppercase">Countries</div>
               </div>
@@ -353,14 +353,14 @@ export default function Home() {
             </h2>
             <div className="space-y-3 max-h-[350px] overflow-y-auto pr-2">
               {experiences.slice(0, 3).map((exp, idx) => (
-                <div key={idx} className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur">
+                <div key={idx} className="bg-black/60 border border-[#177e89]/30 rounded-lg p-3 backdrop-blur">
                   <div className="flex items-start justify-between mb-1">
                     <h3 className="text-lg font-bold text-white">
                       {exp.title}
                     </h3>
-                    <span className="text-xs text-red-600 font-bold">{exp.startDate}</span>
+                    <span className="text-xs text-[#177e89] font-bold">{exp.startDate}</span>
                   </div>
-                  <p className="text-red-400 font-semibold mb-1 text-sm">{exp.company}</p>
+                  <p className="text-[#177e89] font-semibold mb-1 text-sm">{exp.company}</p>
                   <p className="text-xs text-gray-400">{exp.description}</p>
                 </div>
               ))}
@@ -382,15 +382,15 @@ export default function Home() {
             </h2>
             <div className="grid grid-cols-2 gap-3 max-h-[350px] overflow-y-auto pr-2">
               {skills.slice(0, 4).map((category, idx) => (
-                <div key={idx} className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur">
-                  <h3 className="text-xs font-bold text-red-400 uppercase mb-2">
+                <div key={idx} className="bg-black/60 border border-[#177e89]/30 rounded-lg p-3 backdrop-blur">
+                  <h3 className="text-xs font-bold text-[#177e89] uppercase mb-2">
                     {category.category}
                   </h3>
                   <div className="flex flex-wrap gap-1.5">
                     {category.skills.slice(0, 6).map((skill, skillIdx) => (
                       <span
                         key={skillIdx}
-                        className="px-2 py-0.5 bg-black/40 border border-red-600/30 rounded text-xs text-gray-300"
+                        className="px-2 py-0.5 bg-black/40 border border-[#177e89]/30 rounded text-xs text-gray-300"
                       >
                         {skill}
                       </span>
@@ -416,17 +416,17 @@ export default function Home() {
             </h2>
             <div className="grid gap-3 max-h-[350px] overflow-y-auto pr-2">
               {education.map((edu, idx) => (
-                <div key={idx} className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur">
+                <div key={idx} className="bg-black/60 border border-[#177e89]/30 rounded-lg p-3 backdrop-blur">
                   <h3 className="text-lg font-bold text-white mb-1">{edu.degree}</h3>
-                  <p className="text-red-400 font-semibold mb-1 text-sm">{edu.institution}</p>
+                  <p className="text-[#177e89] font-semibold mb-1 text-sm">{edu.institution}</p>
                   <p className="text-xs text-gray-400">{edu.startYear} - {edu.endYear} • {edu.location}</p>
                 </div>
               ))}
-              <div className="bg-black/60 border border-red-600/30 rounded-lg p-3 backdrop-blur">
+              <div className="bg-black/60 border border-[#177e89]/30 rounded-lg p-3 backdrop-blur">
                 <h3 className="text-lg font-bold text-white mb-2">Languages</h3>
                 <div className="flex flex-wrap gap-2">
                   {languages.map((lang, idx) => (
-                    <span key={idx} className="px-3 py-1 bg-black/40 border border-red-600/30 rounded-full text-xs text-gray-300">
+                    <span key={idx} className="px-3 py-1 bg-black/40 border border-[#177e89]/30 rounded-full text-xs text-gray-300">
                       {lang.name}
                     </span>
                   ))}
@@ -445,8 +445,8 @@ export default function Home() {
             exit={{ opacity: 0, scale: 0.9 }}
             className="text-center space-y-4 w-full"
           >
-            <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center border-4 border-yellow-400 shadow-2xl shadow-green-600/50">
-              <Flag size={40} className="text-yellow-400" fill="currentColor" />
+            <div className="w-20 h-20 mx-auto rounded-full bg-[#177e89] flex items-center justify-center border-4 border-[#084c61] shadow-2xl shadow-[#177e89]/50">
+              <Flag size={40} className="text-[#084c61]" fill="currentColor" />
             </div>
             <h2 className="text-4xl font-black">
               GET IN TOUCH
@@ -461,9 +461,9 @@ export default function Home() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-black/60 border-2 border-red-600/30 rounded-lg hover:border-red-600 hover:bg-red-600/20 transition-all duration-300 group backdrop-blur"
+                    className="flex items-center gap-2 px-4 py-2 bg-black/60 border-2 border-[#177e89]/30 rounded-lg hover:border-[#177e89] hover:bg-[#177e89]/20 transition-all duration-300 group backdrop-blur"
                   >
-                    <Icon size={20} className="text-gray-400 group-hover:text-red-600 transition-colors" />
+                    <Icon size={20} className="text-gray-400 group-hover:text-[#177e89] transition-colors" />
                     <span className="text-sm text-gray-300 group-hover:text-white font-medium">{link.name}</span>
                   </a>
                 );
@@ -472,7 +472,7 @@ export default function Home() {
             {personalInfo.email && (
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="inline-block px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 border-2 border-yellow-400 rounded-lg font-black text-base text-white shadow-lg shadow-red-600/50 hover:shadow-red-600/80 transition-all duration-300 uppercase"
+                className="inline-block px-6 py-3 bg-[#177e89] border-2 border-[#084c61] rounded-lg font-black text-base text-white shadow-lg shadow-[#177e89]/50 hover:shadow-[#177e89]/80 transition-all duration-300 uppercase"
               >
                 SEND EMAIL
               </a>
@@ -548,25 +548,25 @@ export default function Home() {
       </div>
 
       {/* Lap Counter */}
-      <div className="fixed bottom-8 right-8 z-50 bg-black/90 border-2 border-red-600 rounded-lg p-4 backdrop-blur-sm">
+      <div className="fixed bottom-8 right-8 z-50 bg-black/90 border-2 border-[#177e89] rounded-lg p-4 backdrop-blur-sm">
         <div className="text-xs text-gray-400 mb-1 font-bold uppercase">
           CURRENT LAP
         </div>
-        <div className="text-3xl font-black text-red-600">
+        <div className="text-3xl font-black text-[#177e89]">
           {currentLap}
         </div>
         <div className="text-[10px] text-gray-500 mt-1">/ {totalLaps - 1} LAPS</div>
         {/* Progress bar */}
         <div className="mt-2 w-16 h-1 bg-gray-800 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-red-600 to-yellow-400 transition-all duration-100"
+            className="h-full bg-[#177e89] transition-all duration-100"
             style={{ width: `${((trackIndex % totalTrackPoints) / totalTrackPoints) * 100}%` }}
           />
         </div>
       </div>
 
       {/* Section indicator */}
-      <div className="fixed bottom-8 left-8 z-50 bg-black/90 border-2 border-red-600 rounded-lg p-4 backdrop-blur-sm">
+      <div className="fixed bottom-8 left-8 z-50 bg-black/90 border-2 border-[#177e89] rounded-lg p-4 backdrop-blur-sm">
         <div className="text-xs text-gray-400 mb-1 font-bold uppercase">
           {sections[currentLap].title}
         </div>
@@ -584,8 +584,8 @@ export default function Home() {
             }}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               currentLap === section.id
-                ? 'bg-red-600 scale-125'
-                : 'bg-gray-600 hover:bg-gray-400'
+                ? 'bg-[#177e89] scale-125'
+                : 'bg-gray-600 hover:bg-[#177e89]'
             }`}
             title={section.title}
           />
